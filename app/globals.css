@@ -20,17 +20,28 @@
   --text-3xl: 2rem; /* 32px  */
   --text-4xl: 2.5rem; /* 40px  */
   --text-5xl: 3rem; /* 48px  */
+
+  --color-licorice: #151515;
+  --color-green-ryb: #51aa35;
+  --color-sap-green: #408929;
+  --color-floral-white: #fdf8f5;
+  --color-usafa-blue: #004f97;
+  --color-deep-lemon: #ffb91d;
+  --color-timberwolf: #ded9d6;
 }
 
 @layer components {
   .button-base-style {
-    @apply rounded-[5px] text-[20px] font-bold px-7 py-2;
+    @apply rounded-[5px] text-[20px] font-bold px-7 py-2 duration-300 ease-in-out transition-all;
+  }
+  .transition-base-style {
+    @apply duration-300 ease-in-out transition-all;
   }
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #151515;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -44,10 +55,10 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 button {
   cursor: pointer;
-  background-color: blanchedalmond;
   border-radius: 5px;
 }

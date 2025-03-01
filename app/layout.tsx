@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Header from "./components/commons/Header";
+import MainWrapper from "./components/commons/MainWrapper";
+import "./globals.css";
+import { AppProvider } from "./context/AppContext";
 
 const interSans = Inter({
   variable: "--font-geist-sans",
@@ -18,14 +20,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
-      <body
-        className={`${interSans.className} antialiased`}
-      >
-        <Header />
-        {children}
-      </body>
-    </html>
+    <AppProvider>
+      <html lang="en">
+        <body
+          className={`${interSans.className} antialiased`}
+        >
+          <Header />
+          <MainWrapper>
+            {children}
+          </MainWrapper>
+        </body>
+      </html>
+    </AppProvider>
   );
 }

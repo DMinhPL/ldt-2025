@@ -40,7 +40,7 @@ const Header: React.FC = () => {
     const [scrollY, setScrollY] = useState(0);
     const [fixedMenu, setFixedMenu] = useState(false);
     const headerHeight = useHeaderHeight();
-    const background = themeBackground === 'primary' ? 'bg-floral-white' : 'bg-white';
+    const background = themeBackground === 'primary' ? 'bg-floral-white' : 'bg-floral-white lg:bg-white';
 
     const burgerMenuState = width < 1024 ? openMenu ? 'transform translate-x-0' : 'transform translate-x-full' : undefined;
 

@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from "react";
 import useWindowDimensions from "../hooks/useWindowDemensions";
+import { usePathname } from "next/navigation";
 
 export interface AppState {
     openMenu: boolean;
@@ -19,11 +20,27 @@ interface Props {
 export const AppProvider: React.FC<Props> = ({ children }) => {
     const [openMenu, setOpenMenu] = useState(false);
     const { width } = useWindowDimensions();
-    const themeBackground = 'primary';
+    const [themeBackground, setThemeBackground] = useState<'primary' | 'secondary'>('primary');
+    const pathname = usePathname();
 
     useEffect(() => {
         if (width >= 1024) setOpenMenu(false);
     }, [width]);
+
+    useEffect(() => {
+        // Update theme based on route
+        switch (pathname) {
+            case '/':
+                setThemeBackground('primary');
+                break;
+            case '/about':
+            case '/chat-ai':
+                setThemeBackground('secondary');
+                break;
+            default:
+                setThemeBackground('primary');
+        }
+    }, [pathname]);
 
     useEffect(() => {
         if (themeBackground === 'primary') {

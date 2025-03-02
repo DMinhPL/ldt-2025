@@ -14,7 +14,7 @@ const getButtonClasses = (
     disabled: boolean,
     className?: HTMLAttributes<HTMLButtonElement>['className']
 ) => {
-    const baseClasses = className?.includes('w-') ? 'a-button button-base-style' : 'a-button button-base-style w-full';
+    const baseClasses = className?.includes('w-') ? 'a-button button-base-style rounded-sm' : 'a-button button-base-style w-full';
     return classNames(
         baseClasses,
         {

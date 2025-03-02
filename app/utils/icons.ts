@@ -4,6 +4,7 @@ import facebookIcon from '../assets/icons/ic_facebook.svg';
 import youtubeIcon from '../assets/icons/ic_youtube.svg';
 import googleIcon from '../assets/icons/ic_google.svg';
 import locationIcon from '../assets/icons/ic_location.svg';
+import arrowRightIcon from '../assets/icons/ic_arrowRight.svg';
 
 export const SVGIcons = {
   envelop: evelopeIcon,
@@ -12,4 +13,5 @@ export const SVGIcons = {
   youtube: youtubeIcon,
   google: googleIcon,
   location: locationIcon,
+  arrowRight: arrowRightIcon,
 };

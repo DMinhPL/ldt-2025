@@ -1,5 +1,9 @@
 import Banner from "./components/commons/Banner";
 import Button from "./components/atoms/Button";
+import hrBg from './assets/images/bg-hr.png';
+import Image from "next/image";
+import Link from "next/link";
+import { SVGIcons } from "./utils/icons";
 
 export default function Home() {
   return <>
@@ -33,6 +37,15 @@ export default function Home() {
             worldwide to efficiently manage their workforce,
             optimize operations, and drive productivity like never before.
           </p>
+          <div className="thumbnail max-w-[1100px] xl:max-w-[1280px] mx-auto mt-10">
+            <Image src={hrBg} alt="banner" />
+          </div>
+          <div className="text-center">
+            <Link href='/case-studies' className="text-green-ryb font-bold text-xl underline inline-flex items-center gap-2">
+              View more Case studies
+              <Image src={SVGIcons.arrowRight} alt="arrow right" width={19} height={14} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

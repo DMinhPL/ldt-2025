@@ -5,10 +5,12 @@ import useWindowDimensions from "../hooks/useWindowDemensions";
 export interface AppState {
     openMenu: boolean;
     setOpenMenu: (open: boolean) => void;
+    themeBackground: 'primary' | 'secondary'
 }
 const AppContext = createContext<AppState>({
     openMenu: false,
-    setOpenMenu: () => { }
+    setOpenMenu: () => { },
+    themeBackground: 'primary'
 });
 
 interface Props {
@@ -17,13 +19,24 @@ interface Props {
 export const AppProvider: React.FC<Props> = ({ children }) => {
     const [openMenu, setOpenMenu] = useState(false);
     const { width } = useWindowDimensions();
+    const themeBackground = 'primary';
 
     useEffect(() => {
         if (width >= 1024) setOpenMenu(false);
     }, [width]);
 
+    useEffect(() => {
+        if (themeBackground === 'primary') {
+            document.body.classList.add('bg-floral-white');
+            document.body.classList.remove('bg-white');
+        } else {
+            document.body.classList.add('bg-white');
+            document.body.classList.remove('bg-floral-white');
+        }
+    }, [themeBackground])
+
     return (
-        <AppContext.Provider value={{ openMenu, setOpenMenu }}>
+        <AppContext.Provider value={{ openMenu, setOpenMenu, themeBackground }}>
             {children}
         </AppContext.Provider>
     );

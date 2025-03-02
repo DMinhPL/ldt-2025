@@ -35,11 +35,12 @@ const headerMenu = [
 ]
 
 const Header: React.FC = () => {
-    const { openMenu, setOpenMenu } = useAppContext();
+    const { openMenu, setOpenMenu, themeBackground } = useAppContext();
     const { width } = useWindowDimensions();
     const [scrollY, setScrollY] = useState(0);
     const [fixedMenu, setFixedMenu] = useState(false);
     const headerHeight = useHeaderHeight();
+    const background = themeBackground === 'primary' ? 'bg-floral-white' : 'bg-white';
 
     const burgerMenuState = width < 1024 ? openMenu ? 'transform translate-x-0' : 'transform translate-x-full' : undefined;
 
@@ -62,7 +63,7 @@ const Header: React.FC = () => {
     }, [scrollY]);
 
     return (
-        <header className={`o-header ${fixedMenu ? 'bg-floral-white' : 'bg-floral-white lg:bg-transparent'} fixed top-0 left-0 w-full z-50`}>
+        <header className={`o-header ${fixedMenu ? background : `${background} lg:bg-transparent`} fixed top-0 left-0 w-full z-50`}>
             <div className="container mx-auto">
                 <div className="wrapper flex items-center py-3 justify-center lg:justify-between">
                     {/* Burger menu  */}

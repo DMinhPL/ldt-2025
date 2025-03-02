@@ -12,7 +12,7 @@ const BurgerButton: React.FC<Props> = ({ onClick, isOpen }) => {
             onClick={() => onClick(!isOpen)}
         >
             <div
-                className={`relative flex overflow-hidden items-center justify-center w-[40px] h-[40px] transform transition-all bg-timberwolf ring-0 ring-gray-300 hover:ring-8 ${open ? "ring-4" : ""} ring-opacity-30 duration-200 shadow-md`}
+                className={`relative flex overflow-hidden items-center justify-center w-[40px] h-[40px] transform transition-all bg-timberwolf ring-0 ring-gray-300 hover:ring-8 ${isOpen ? "ring-4" : ""} ring-opacity-30 duration-200 shadow-md`}
             >
                 <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
                     <div

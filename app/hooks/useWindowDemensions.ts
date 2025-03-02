@@ -5,28 +5,22 @@ interface InnertWindow {
   height: number;
 }
 
-const getWindowDimensions = (): InnertWindow => {
-  const { innerWidth, innerHeight } = window;
-  return {
-    width: innerWidth,
-    height: innerHeight,
-  };
-};
-
 const useWindowDimensions = (): InnertWindow => {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
 
   useEffect(() => {
-    const handleResize = (): void => {
-      setWindowDimensions(getWindowDimensions());
-    };
-    window.addEventListener('resize', handleResize);
-    return (): void => window.removeEventListener('resize', handleResize);
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return (): void => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
-  return windowDimensions;
+  return { width, height };
 };
 
 export default useWindowDimensions;

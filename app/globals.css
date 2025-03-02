@@ -28,6 +28,8 @@
   --color-usafa-blue: #004f97;
   --color-deep-lemon: #ffb91d;
   --color-timberwolf: #ded9d6;
+  --color-raisin-black: #222222;
+  --color-battleship-grey: #838383;
 }
 
 @layer components {
@@ -36,6 +38,10 @@
   }
   .transition-base-style {
     @apply duration-300 ease-in-out transition-all;
+  }
+
+  .container {
+    @apply px-4;
   }
 }
 
@@ -61,4 +67,34 @@ body {
 button {
   cursor: pointer;
   border-radius: 5px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 1s ease-in-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-in-out forwards;
+}
+
+a:hover {
+  @apply text-green-ryb duration-300 ease-in-out transition-all;
 }

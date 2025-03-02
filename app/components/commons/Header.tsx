@@ -3,12 +3,13 @@ import { useAppContext } from '@/app/context/AppContext';
 import useWindowDimensions from '@/app/hooks/useWindowDemensions';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import hotlineIcon from '../../assets/icons/ic_hotline.svg';
 import logo from '../../assets/images/logo.png';
 import BurgerButton from '../atoms/BurgerButton';
 import Button from '../atoms/Button';
 import HeaderMenuItem from '../atoms/HeaderMenuItem';
+import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 
 const headerMenu = [
     {
@@ -36,11 +37,32 @@ const headerMenu = [
 const Header: React.FC = () => {
     const { openMenu, setOpenMenu } = useAppContext();
     const { width } = useWindowDimensions();
+    const [scrollY, setScrollY] = useState(0);
+    const [fixedMenu, setFixedMenu] = useState(false);
+    const headerHeight = useHeaderHeight();
 
     const burgerMenuState = width < 1024 ? openMenu ? 'transform translate-x-0' : 'transform translate-x-full' : undefined;
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > 30) {
+                setFixedMenu(true);
+            } else {
+                setFixedMenu(false);
+            }
+            setScrollY(currentScrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [scrollY]);
+
     return (
-        <header className='o-header bg-floral-white fixed top-0 left-0 w-full z-50'>
+        <header className={`o-header ${fixedMenu ? 'bg-floral-white' : 'bg-floral-white lg:bg-transparent'} fixed top-0 left-0 w-full z-50`}>
             <div className="container mx-auto">
                 <div className="wrapper flex items-center py-3 justify-center lg:justify-between">
                     {/* Burger menu  */}
@@ -48,14 +70,17 @@ const Header: React.FC = () => {
                     {/* Left side */}
                     <div className="left flex items-center">
                         {/* Logo  */}
-                        <div className="logo">
+                        <div className="logo max-w-[90px] lg:max-w-full">
                             <Link href='/'>
                                 <Image src={logo} alt="logo" width={115} height={46} />
                             </Link>
                         </div>
                         {/* Menu  */}
                         <ul
-                            className={`menu${burgerMenuState ? ` ${burgerMenuState}` : ''} lg:flex lg:items-center lg:gap-2 lg:pl-10 p-4 lg:p-0 xl:gap-3 xl:pl-16 fixed lg:static top-[70px] left-0 w-full h-full bg-white lg:bg-transparent z-50 transition-base-style`}
+                            className={`menu${burgerMenuState ? ` ${burgerMenuState}` : ''} lg:flex lg:items-center lg:gap-2 lg:pl-10 p-4 lg:p-0 xl:gap-3 xl:pl-16 fixed lg:static left-0 w-full h-full bg-white lg:bg-transparent z-50 transition-base-style`}
+                            style={{
+                                top: `${headerHeight}px`
+                            }}
                         >
                             {
                                 headerMenu.map((item, index) => (

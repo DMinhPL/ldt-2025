@@ -4,6 +4,7 @@ import hrBg from './assets/images/bg-hr.png';
 import Image from "next/image";
 import Link from "next/link";
 import { SVGIcons } from "./utils/icons";
+import AIModuleIframe from "./components/commons/AIModuleIframe";
 
 export default function Home() {
   return <>
@@ -19,16 +20,17 @@ export default function Home() {
       <div className="container mx-auto">
         {/* Chat AI  */}
         <div className="content text-center">
-          <h2 className="text-[55px] text-raisin-black">Chat Live with LDT AI</h2>
+          <h2 className="text-3xl lg:text-[55px] text-raisin-black">Chat Live with LDT AI</h2>
           <p className="text-licorice text-lg mt-2 max-w-[641px] mx-auto">
             Experience our smart chat feature – ask questions and get instant responses,
             just like talking to a real expert!
           </p>
+          <AIModuleIframe />
         </div>
         {/* Global HR Management  */}
-        <div className="content mt-14">
-          <h4 className="text-usafa-blue font-semibold text-xl">FROM OUT CASE STUDIES</h4>
-          <h2 className="text-[55px] text-raisin-black">
+        <div className="content mt-5">
+          <h4 className="text-usafa-blue font-semibold text-base lg:text-xl">FROM OUT CASE STUDIES</h4>
+          <h2 className="text-3xl lg:text-[55px] text-raisin-black">
             Global HR Management <br />
             Streamlining Workforce Operations
           </h2>

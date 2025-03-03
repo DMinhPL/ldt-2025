@@ -18,7 +18,7 @@ const Banner: React.FC<Props> = ({ title, description, action, titleStyles, imgS
     const headerHeight = useHeaderHeight();
     const { themeBackground } = useAppContext();
 
-    const headingStyles = `${titleStyles ? titleStyles : 'lg:max-w-[576px]'} text-raisin-black text-4xl xl:text-[55px] max-w-[570px] mx-auto lg:mx-0 font-bold text-center lg:text-left opacity-0 animate-fade-in-up`
+    const headingStyles = `${titleStyles ? titleStyles : 'lg:max-w-[576px]'} text-raisin-black text-3xl lg:text-4xl xl:text-[55px] max-w-[570px] mx-auto lg:mx-0 font-bold text-center lg:text-left opacity-0 animate-fade-in-up`
 
     return (
         <div className='banner' style={themeBackground === 'primary' ? {

@@ -20,7 +20,7 @@ export default function Home() {
       <div className="container mx-auto">
         {/* Chat AI  */}
         <div className="content text-center">
-          <h2 className="text-3xl lg:text-[55px] text-raisin-black">Chat Live with LDT AI</h2>
+          <h2 className="text-[30px] lg:text-[55px] text-raisin-black">Chat Live with LDT AI</h2>
           <p className="text-licorice text-lg mt-2 max-w-[641px] mx-auto">
             Experience our smart chat feature – ask questions and get instant responses,
             just like talking to a real expert!
@@ -28,9 +28,9 @@ export default function Home() {
           <AIModuleIframe />
         </div>
         {/* Global HR Management  */}
-        <div className="content mt-5">
-          <h4 className="text-usafa-blue font-semibold text-base lg:text-xl">FROM OUT CASE STUDIES</h4>
-          <h2 className="text-3xl lg:text-[55px] text-raisin-black">
+        <div className="content mt-12">
+          <h4 className="text-usafa-blue font-semibold text-xl">FROM OUT CASE STUDIES</h4>
+          <h2 className="text-[30px] lg:text-[55px] text-raisin-black font-semibold lg:font-bold">
             Global HR Management <br />
             Streamlining Workforce Operations
           </h2>
@@ -43,7 +43,7 @@ export default function Home() {
             <Image src={hrBg} alt="banner" />
           </div>
           <div className="text-center">
-            <Link href='/case-studies' className="text-green-ryb font-bold text-xl underline inline-flex items-center gap-2">
+            <Link href='/case-studies' className="text-green-ryb font-bold text-lg lg:text-xl underline inline-flex items-center gap-2">
               View more Case studies
               <Image src={SVGIcons.arrowRight} alt="arrow right" width={19} height={14} />
             </Link>

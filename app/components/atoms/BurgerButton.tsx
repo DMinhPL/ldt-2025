@@ -8,11 +8,11 @@ interface Props {
 const BurgerButton: React.FC<Props> = ({ onClick, isOpen }) => {
     return (
         <button
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 group lg:hidden"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 group lg:hidden"
             onClick={() => onClick(!isOpen)}
         >
             <div
-                className={`relative flex overflow-hidden items-center justify-center w-[40px] h-[40px] transform transition-all bg-timberwolf ring-0 ring-gray-300 hover:ring-8 ${isOpen ? "ring-4" : ""} ring-opacity-30 duration-200 shadow-md`}
+                className={`relative flex overflow-hidden items-center justify-center w-[40px] h-[40px] transform transition-all ring-gray-300 hover:ring-8 ${isOpen ? "ring-2" : ""} ring-opacity-30 duration-200`}
             >
                 <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
                     <div

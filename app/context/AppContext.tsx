@@ -28,17 +28,16 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
     }, [width]);
 
     useEffect(() => {
-        // Update theme based on route
-        switch (pathname) {
-            case '/':
-                setThemeBackground('primary');
-                break;
-            case '/about':
-            case '/chat-ai':
-                setThemeBackground('secondary');
-                break;
-            default:
-                setThemeBackground('primary');
+        if (pathname === "/") {
+            setThemeBackground("primary");
+        } else if (
+            pathname === "/about" ||
+            pathname === "/chat-ai" ||
+            pathname.startsWith("/case-studies/")
+        ) {
+            setThemeBackground("secondary");
+        } else {
+            setThemeBackground("primary");
         }
     }, [pathname]);
 

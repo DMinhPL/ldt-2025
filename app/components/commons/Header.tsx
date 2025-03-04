@@ -77,20 +77,37 @@ const Header: React.FC = () => {
                             </Link>
                         </div>
                         {/* Menu  */}
-                        <ul
-                            className={`menu${burgerMenuState ? ` ${burgerMenuState}` : ''} lg:flex lg:items-center lg:gap-2 lg:pl-10 p-4 lg:p-0 xl:gap-3 xl:pl-16 fixed lg:static left-0 w-full h-full bg-white lg:bg-transparent z-50 transition-base-style`}
+                        <div
+                            className={`menu${burgerMenuState ? ` ${burgerMenuState}` : ''} fixed lg:static left-0 w-full h-full bg-white lg:bg-transparent z-50 transition-base-style`}
                             style={{
                                 top: `${headerHeight}px`
                             }}
                         >
-                            {
-                                headerMenu.map((item, index) => (
-                                    <li className='lg:mb-0 mb-2.5' key={index}>
-                                        <HeaderMenuItem {...item} />
-                                    </li>
-                                ))
-                            }
-                        </ul>
+                            <ul className='lg:flex lg:items-center lg:gap-2 lg:pl-10 p-4 lg:p-0 xl:gap-3 xl:pl-16'>
+                                {
+                                    headerMenu.map((item, index) => (
+                                        <li className='lg:py-0 py-6 border-b border-dashed border-battleship-grey lg:border-none' key={index}>
+                                            <HeaderMenuItem {...item} />
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                            <div className="p-4 hotline flex lg:hidden items-center">
+                                <Image src={hotlineIcon} alt='hotline' width={18} height={18} className='mr-1' />
+                                <p className='text-lg'>
+                                    Hotline:
+                                    {' '}
+                                    <a href="tel:0123456789" className="font-bold text-usafa-blue">
+                                        0123456789
+                                    </a>
+                                </p>
+                            </div>
+                            <div className="button p-4 lg:hidden max-w-[200px]">
+                                <Button>
+                                    Get Started
+                                </Button>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Right side  */}

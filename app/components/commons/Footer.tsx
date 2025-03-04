@@ -30,12 +30,27 @@ const ContactInfo: React.FC<{ title: string; info: { href?: string; icon: string
 
 /** Reusable Navigation Links Component with Invisible Title Handling */
 const NavLinkList: React.FC<{ title?: string; links: { label: string; href: string }[] }> = ({ title, links }) => (
-    <div>
-        <h3 className={`text-lg lg:text-[22px] font-bold ${title ? "" : "opacity-0 pointer-events-none hidden lg:block"}`}>{title || "Placeholder"}</h3>
+    <div className="navLink lg:block hidden">
+        <h3 className={`text-lg lg:text-[22px] font-bold ${title ? "" : "opacity-0 pointer-events-none lg:block"}`}>{title || "Placeholder"}</h3>
         <ul className="lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col">
             {links.map(({ label, href }, index) => (
                 <li key={index} className="flex">
-                    <Link href={href} className="ml-2 w-full">
+                    <Link href={href} className="lg:ml-2 w-full">
+                        {label}
+                    </Link>
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+/** Reusable Navigation Links Component with Invisible Title Handling */
+const NavLinkListMobile: React.FC<{ title?: string; links: { label: string; href: string }[] }> = ({ title, links }) => (
+    <div className="navLink lg:w-full w-1/2">
+        <h3 className={`text-lg lg:text-[22px] font-bold ${title ? "" : "opacity-0 pointer-events-none lg:block"}`}>{title || "Placeholder"}</h3>
+        <ul className="lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col">
+            {links.map(({ label, href }, index) => (
+                <li key={index} className="flex">
+                    <Link href={href} className="lg:ml-2 w-full">
                         {label}
                     </Link>
                 </li>
@@ -65,14 +80,14 @@ const Footer: React.FC = () => {
 
     return (
         <footer className="bg-white">
-            <div className="container mx-auto pt-[50px] pb-5">
+            <div className="container mx-auto  pt-9 lg:pt-[50px] pb-5">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                     {/* Logo & Socials */}
-                    <div>
+                    <div className="lg:block flex justify-center items-center flex-col">
                         <Link href="/">
                             <Image src={logo} alt="Company Logo" width={121} height={49} />
                         </Link>
-                        <div className="flex gap-7 items-center mt-14">
+                        <div className="flex gap-7 items-center mt-4 lg:mt-14">
                             {socialLinks.map(({ href, icon, alt }) => (
                                 <a key={alt} href={href} target="_blank" rel="noopener noreferrer">
                                     <Image src={icon} alt={alt} width={20} height={20} />
@@ -85,14 +100,19 @@ const Footer: React.FC = () => {
                     <ContactInfo title="Office" info={contactInfo} />
 
                     {/* Navigation Links with Invisible Title Handling */}
+                    <div className="flex lg:hidden">
+                        {navLinks.map(({ title, links }, index) => (
+                            <NavLinkListMobile key={index} title={title} links={links} />
+                        ))}
+                    </div>
                     {navLinks.map(({ title, links }, index) => (
                         <NavLinkList key={index} title={title} links={links} />
                     ))}
 
                     {/* CTA Button */}
                     <div className="">
-                        <h3 className={`text-lg lg:text-[22px] font-bold opacity-0 pointer-events-none`}>Placeholder</h3>
-                        <div className="action mt-5 max-w-[191px]">
+                        <h3 className={`text-lg lg:text-[22px] font-bold opacity-0 pointer-events-none hidden lg:block`}>Placeholder</h3>
+                        <div className="action lg:mt-5 max-w-[191px]">
                             <Button>Get Started</Button>
                         </div>
                     </div>

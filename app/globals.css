@@ -30,6 +30,8 @@
   --color-timberwolf: #ded9d6;
   --color-raisin-black: #222222;
   --color-battleship-grey: #838383;
+  --color-pastel-gray: #cbcbcb;
+  --color-white-smoke: #f6fbf4;
 }
 
 @layer components {

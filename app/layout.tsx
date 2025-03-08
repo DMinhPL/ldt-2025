@@ -4,7 +4,7 @@ import Header from "./components/commons/Header";
 import { AppProvider } from "./context/AppContext";
 import "./globals.css";
 import Footer from "./components/commons/Footer";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const interSans = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,6 +31,7 @@ export default function RootLayout({
           <main className="main-wrapper">
             {children}
           </main>
+          <SpeedInsights />
           <Footer />
         </body>
       </html>

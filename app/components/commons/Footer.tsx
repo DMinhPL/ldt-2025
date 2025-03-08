@@ -1,12 +1,13 @@
-import React from "react";
+import { contactInfo, navLinks, socialLinks } from "@/app/utils/statics";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import logo from "../../assets/images/logo.png";
-import { SVGIcons } from "@/app/utils/icons";
 import Button from "../atoms/Button";
+import LanguageSwitcher from "../atoms/LanguageSwitcher";
 
 /** Reusable Contact Info Component */
-const ContactInfo: React.FC<{ title: string; info: { href?: string; icon: string; text: string }[] }> = ({ title, info }) => (
+export const ContactInfo: React.FC<{ title: string; info: { href?: string; icon: string; text: string }[] }> = ({ title, info }) => (
     <div className="text-raisin-black">
         <h3 className="text-lg lg:text-[22px] font-bold">{title}</h3>
         <ul className="lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col">
@@ -34,7 +35,7 @@ const NavLinkList: React.FC<{ title?: string; links: { label: string; href: stri
         <h3 className={`text-lg lg:text-[22px] font-bold ${title ? "" : "opacity-0 pointer-events-none lg:block"}`}>{title || "Placeholder"}</h3>
         <ul className="lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col">
             {links.map(({ label, href }, index) => (
-                <li key={index} className="flex">
+                <li key={`${label}-${index}`} className="flex">
                     <Link href={href} className="lg:ml-2 w-full">
                         {label}
                     </Link>
@@ -49,7 +50,7 @@ const NavLinkListMobile: React.FC<{ title?: string; links: { label: string; href
         <h3 className={`text-lg lg:text-[22px] font-bold ${title ? "" : "opacity-0 pointer-events-none lg:block"}`}>{title || "Placeholder"}</h3>
         <ul className="lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col">
             {links.map(({ label, href }, index) => (
-                <li key={index} className="flex">
+                <li key={`${label}-${index}`} className="flex">
                     <Link href={href} className="lg:ml-2 w-full">
                         {label}
                     </Link>
@@ -61,22 +62,6 @@ const NavLinkListMobile: React.FC<{ title?: string; links: { label: string; href
 
 
 const Footer: React.FC = () => {
-    const socialLinks = [
-        { href: "https://www.facebook.com/", icon: SVGIcons.facebook, alt: "Facebook" },
-        { href: "https://www.youtube.com/", icon: SVGIcons.youtube, alt: "YouTube" },
-        { href: "https://www.google.com/", icon: SVGIcons.google, alt: "Google" },
-    ];
-
-    const contactInfo = [
-        { href: "", icon: SVGIcons.location, text: "Germany — 785 15h Street, Office 478 Berlin, De 81566" },
-        { href: "mailto:info@email.com", icon: SVGIcons.envelop, text: "info@email.com" },
-        { href: "tel:123456789", icon: SVGIcons.phone, text: "123456789" },
-    ];
-
-    const navLinks = [
-        { title: "Links", links: [{ label: "Home", href: "/" }, { label: "Chat AI", href: "/chat-ai" }, { label: "Case Studies", href: "/case-studies" }] },
-        { title: "", links: [{ label: "About Us", href: "/about" }, { label: "Contact Us", href: "/contact" }] },
-    ];
 
     return (
         <footer className="bg-white">
@@ -102,18 +87,21 @@ const Footer: React.FC = () => {
                     {/* Navigation Links with Invisible Title Handling */}
                     <div className="flex lg:hidden">
                         {navLinks.map(({ title, links }, index) => (
-                            <NavLinkListMobile key={index} title={title} links={links} />
+                            <NavLinkListMobile key={`${title}-${index}`} title={title} links={links} />
                         ))}
                     </div>
                     {navLinks.map(({ title, links }, index) => (
-                        <NavLinkList key={index} title={title} links={links} />
+                        <NavLinkList key={`${title}-${index}`} title={title} links={links} />
                     ))}
 
                     {/* CTA Button */}
-                    <div className="">
+                    <div className="lg:block flex flex-row-reverse gap-3.5">
                         <h3 className={`text-lg lg:text-[22px] font-bold opacity-0 pointer-events-none hidden lg:block`}>Placeholder</h3>
-                        <div className="action lg:mt-5 max-w-[191px]">
+                        <div className="action lg:mt-5 max-w-[191px] lg:w-full w-1/2">
                             <Button>Get Started</Button>
+                        </div>
+                        <div className="lg:mt-2 max-w-[191px] lg:w-full w-1/2">
+                            <LanguageSwitcher />
                         </div>
                     </div>
                 </div>

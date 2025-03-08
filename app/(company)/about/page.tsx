@@ -20,13 +20,13 @@ const About = () => {
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="content">
-                        <h4 className="text-usafa-blue font-semibold text-base lg:text-xl">WHO WE ARE</h4>
-                        <h2 className="text-2xl lg:text-[40px] xl:text-[55px] text-raisin-black">
+                        <h4 className="text-usafa-blue font-semibold text-xl">WHO WE ARE</h4>
+                        <h2 className="text-2xl lg:text-[40px] xl:text-[55px] text-raisin-black mt-2 lg:mt-0">
                             Lorem Ipsum is simply dummy text of the printing and typesetting
                         </h2>
                     </div>
                     <div className="content pl-0 lg:pl-10 xl:pl-20">
-                        <h4 className="text-usafa-blue font-semibold text-base lg:text-xl opacity-0 pointer-events-none hidden lg:block">placeholder</h4>
+                        <h4 className="text-usafa-blue font-semibold text-xl opacity-0 pointer-events-none hidden lg:block">placeholder</h4>
                         <p className="text-licorice text-lg lg:mt-2 max-w-[920px]">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,
@@ -37,15 +37,15 @@ const About = () => {
             </div>
         </section>
         {/* What we do  */}
-        <section id="what" className='py-10 lg:py-[80px]'>
+        <section id="what" className='pt-10 pb-8 lg:py-[80px]'>
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="content">
                         <Image src={whatWeDoImg.src} alt="banner" width={763} height={501} />
                     </div>
                     <div className="content pl-0 lg:pl-10 xl:pl-20">
-                        <h4 className="text-usafa-blue font-semibold text-base lg:text-xl">WHAT WE DO</h4>
-                        <h2 className="text-2xl lg:text-[40px] xl:text-[55px] text-raisin-black">
+                        <h4 className="text-usafa-blue font-semibold text-xl">WHAT WE DO</h4>
+                        <h2 className="text-2xl lg:text-[40px] xl:text-[55px] text-raisin-black mt-2 lg:mt-0">
                             Lorem Ipsum is simply dummy text of the printing and typesetting
                         </h2>
                         <p className="text-licorice text-lg mt-2 max-w-[920px]">
@@ -64,8 +64,8 @@ const About = () => {
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
                     <div className="content">
-                        <h4 className="text-usafa-blue font-semibold text-base lg:text-xl">WHY CHOOSE US</h4>
-                        <h2 className="text-2xl lg:text-[40px] xl:text-[55px] text-raisin-black mb-9">
+                        <h4 className="text-usafa-blue font-semibold text-xl">WHY CHOOSE US</h4>
+                        <h2 className="text-2xl lg:text-[40px] xl:text-[55px] text-raisin-black mt-2 lg:mt-0 mb-9">
                             We are expert in IT solutions Services
                         </h2>
                         <AboutAccordion />

@@ -32,6 +32,9 @@
   --color-battleship-grey: #838383;
   --color-pastel-gray: #cbcbcb;
   --color-white-smoke: #f6fbf4;
+  --color-silver-chalice: #acacac;
+  --color-ash-grey: #b3b3b3;
+  --color-quartz: #4b4b4b;
 }
 
 @layer components {
@@ -76,7 +79,7 @@
 body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 button {

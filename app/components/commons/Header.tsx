@@ -116,7 +116,7 @@ const Header: React.FC = () => {
                         <div className="contact">
                             <div className="hotline flex items-center">
                                 <Image src={hotlineIcon} alt='hotline' width={18} height={18} className='mr-1' />
-                                <p className='text-lg'>
+                                <p className='text-base xl:text-lg'>
                                     Hotline:
                                     {' '}
                                     <a href="tel:0123456789" className="font-bold text-usafa-blue">

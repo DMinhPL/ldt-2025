@@ -1,22 +1,30 @@
-import React, { useEffect, MutableRefObject } from 'react';
+import { useEffect, useCallback, RefObject } from 'react';
 
-const useClickOutside = <T extends HTMLElement | HTMLDivElement>(
-  ref: React.RefObject<T>,
-  callback: (event: MouseEvent) => void,
+/**
+ * Custom hook to detect clicks outside of a referenced element.
+ * @param ref - The ref of the element to monitor.
+ * @param callback - Function to execute when a click outside occurs.
+ */
+const useClickOutside = <T extends HTMLElement>(
+  ref: RefObject<T>,
+  callback: (event: MouseEvent) => void
 ): void => {
-  const handleClick = (e: MouseEvent): void => {
-    if (ref.current && !ref.current.contains((e.target as Node) || null)) {
-      callback(e);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener('click', handleClick);
+  const handleClick = useCallback(
+    (event: MouseEvent): void => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback(event);
+      }
+    },
+    [ref, callback]
+  );
 
-    return (): void => {
-      document.removeEventListener('click', handleClick);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref as MutableRefObject<T>, callback]);
+  }, [handleClick]);
 };
 
 export default useClickOutside;

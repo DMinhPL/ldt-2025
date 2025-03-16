@@ -6,25 +6,25 @@ import { useEffect, useCallback, RefObject } from 'react';
  * @param callback - Function to execute when a click outside occurs.
  */
 const useClickOutside = <T extends HTMLElement>(
-  ref: RefObject<T>,
-  callback: (event: MouseEvent) => void
+    ref: RefObject<T>,
+    callback: (event: MouseEvent) => void,
 ): void => {
-  const handleClick = useCallback(
-    (event: MouseEvent): void => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback(event);
-      }
-    },
-    [ref, callback]
-  );
+    const handleClick = useCallback(
+        (event: MouseEvent): void => {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
+                callback(event);
+            }
+        },
+        [ref, callback],
+    );
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClick);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, [handleClick]);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+        };
+    }, [handleClick]);
 };
 
 export default useClickOutside;

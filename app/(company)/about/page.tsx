@@ -1,22 +1,22 @@
 import Banner from '@/app/components/commons/Banner';
 import React from 'react';
-import aboutBg from '../../assets/images/banner-about.png';
-import whatWeDoImg from '../../assets/images/whatwedo.png';
-import whyChooseUsImg from '../../assets/images/whyChooseUs.png';
 import Image from 'next/image';
 import AboutAccordion from '@/app/components/commons/AboutAccordion';
 import Button from '@/app/components/atoms/Button';
+import aboutBg from '../../assets/images/banner-about.png';
+import whatWeDoImg from '../../assets/images/whatwedo.png';
+import whyChooseUsImg from '../../assets/images/whyChooseUs.png';
 
-const About = () => {
-    return <>
+const About = () => (
+    <>
         <Banner
             imgSrc={aboutBg.src}
-            titleStyles='lg:max-w-[790px]'
+            titleStyles="lg:max-w-[790px]"
             title="Accelerating your business through innovative motion IT Solutions problems."
             description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a"
         />
         {/* Who we are  */}
-        <section id="who" className='py-10 lg:py-[80px]'>
+        <section id="who" className="py-10 lg:py-[80px]">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="content">
@@ -37,7 +37,7 @@ const About = () => {
             </div>
         </section>
         {/* What we do  */}
-        <section id="what" className='pt-10 pb-8 lg:py-[80px]'>
+        <section id="what" className="pt-10 pb-8 lg:py-[80px]">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="content">
@@ -60,7 +60,7 @@ const About = () => {
             </div>
         </section>
         {/* Why choose us  */}
-        <section id="why" className='py-[42px] bg-floral-white'>
+        <section id="why" className="py-[42px] bg-floral-white">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
                     <div className="content">
@@ -77,7 +77,7 @@ const About = () => {
             </div>
         </section>
         {/* Want to chat  */}
-        <section id="wantTo" className='py-[80px] bg-floral-white'>
+        <section id="wantTo" className="py-[80px] bg-floral-white">
             <div className="container mx-auto">
                 <div className="content text-center">
                     <h2 className="text-3xl lg:text-[40px] text-raisin-black">
@@ -87,7 +87,7 @@ const About = () => {
                         Schedule a free project consultation with one of our solutions architects today!
                     </p>
                     <div className="cta flex justify-center mt-[29px]">
-                        <Button className='max-w-[191px]'>
+                        <Button className="max-w-[191px]">
                             Schedule Now!
                         </Button>
                     </div>
@@ -95,6 +95,6 @@ const About = () => {
             </div>
         </section>
     </>
-};
+);
 
 export default About;

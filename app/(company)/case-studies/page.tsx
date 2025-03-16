@@ -1,4 +1,5 @@
 'use client';
+
 import Banner from '@/app/components/commons/Banner';
 import CaseStudiesPaging from '@/app/components/templates/CaseStudiesPaging';
 import caseBg from '../../assets/images/banner-case.png';
@@ -93,26 +94,28 @@ const caseData = [
         title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
     },
-]
+];
 
 const CaseStudies: React.FC = () => {
-
     const handlePageChange = (page: number) => {
         console.log(page);
     };
-    return <>
-        <Banner
-            imgSrc={caseBg.src}
-            title="Success Stories - Real Case Studies"
-            description='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a'
-        />
-        {/* Who we are  */}
-        <section id="who" className='py-10 lg:py-[80px]'>
-            <div className="container mx-auto">
-                <CaseStudiesPaging itemsPerPage={7} data={caseData} handlePageChange={handlePageChange} />
-            </div>
-        </section>
-    </>
+
+    return (
+        <>
+            <Banner
+                imgSrc={caseBg.src}
+                title="Success Stories - Real Case Studies"
+                description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a"
+            />
+            {/* Who we are  */}
+            <section id="who" className="py-10 lg:py-[80px]">
+                <div className="container mx-auto">
+                    <CaseStudiesPaging itemsPerPage={7} data={caseData} handlePageChange={handlePageChange} />
+                </div>
+            </section>
+        </>
+    );
 };
 
 export default CaseStudies;

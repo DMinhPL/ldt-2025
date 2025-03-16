@@ -7,7 +7,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({
-    currentPage, totalPages, onPageChange
+    currentPage, totalPages, onPageChange,
 }) => {
     const getPageNumbers = () => {
         const pageNumbers = [];
@@ -22,6 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({
         } else {
             pageNumbers.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
         }
+
         return pageNumbers;
     };
 
@@ -32,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({
     };
 
     return (
-        <div className='m-pagination flex items-center space-x-2 justify-center'>
+        <div className="m-pagination flex items-center space-x-2 justify-center">
             {/* <span className='mr-2 text-md hidden md:inline'>Trang {currentPage} của {totalPages} (tổng {total})</span> */}
             {/* {
         currentPage > 1

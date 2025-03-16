@@ -6,21 +6,22 @@ interface InnertWindow {
 }
 
 const useWindowDimensions = (): InnertWindow => {
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
 
-  const handleWindowResize = () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  };
+    const handleWindowResize = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    };
 
-  useEffect(() => {
-    handleWindowResize();
-    window.addEventListener('resize', handleWindowResize);
-    return (): void => window.removeEventListener('resize', handleWindowResize);
-  }, []);
+    useEffect(() => {
+        handleWindowResize();
+        window.addEventListener('resize', handleWindowResize);
 
-  return { width, height };
+        return (): void => window.removeEventListener('resize', handleWindowResize);
+    }, []);
+
+    return { width, height };
 };
 
 export default useWindowDimensions;

@@ -1,15 +1,16 @@
 'use client';
+
 import { useAppContext } from '@/app/context/AppContext';
 import useWindowDimensions from '@/app/hooks/useWindowDemensions';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 import hotlineIcon from '../../assets/icons/ic_hotline.svg';
 import logo from '../../assets/images/logo.png';
 import BurgerButton from '../atoms/BurgerButton';
 import Button from '../atoms/Button';
 import HeaderMenuItem from '../atoms/HeaderMenuItem';
-import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 
 const headerMenu = [
     {
@@ -31,8 +32,8 @@ const headerMenu = [
     {
         url: '/contact',
         title: 'Contact',
-    }
-]
+    },
+];
 
 const Header: React.FC = () => {
     const { openMenu, setOpenMenu, themeBackground } = useAppContext();
@@ -72,7 +73,7 @@ const Header: React.FC = () => {
                     <div className="left flex items-center">
                         {/* Logo  */}
                         <div className="logo max-w-[90px] lg:max-w-full">
-                            <Link href='/'>
+                            <Link href="/">
                                 <Image src={logo} alt="logo" width={115} height={46} />
                             </Link>
                         </div>
@@ -80,21 +81,21 @@ const Header: React.FC = () => {
                         <div
                             className={`menu${burgerMenuState ? ` ${burgerMenuState}` : ''} fixed lg:static left-0 w-full h-full bg-white lg:bg-transparent z-50 transition-base-style`}
                             style={{
-                                top: `${headerHeight}px`
+                                top: `${headerHeight}px`,
                             }}
                         >
-                            <ul className='lg:flex lg:items-center lg:gap-2 lg:pl-10 p-4 lg:p-0 xl:gap-3 xl:pl-16'>
+                            <ul className="lg:flex lg:items-center lg:gap-2 lg:pl-10 p-4 lg:p-0 xl:gap-3 xl:pl-16">
                                 {
                                     headerMenu.map((item, index) => (
-                                        <li className='lg:py-0 py-6 border-b border-dashed border-battleship-grey lg:border-none' key={index}>
+                                        <li className="lg:py-0 py-6 border-b border-dashed border-battleship-grey lg:border-none" key={index}>
                                             <HeaderMenuItem {...item} />
                                         </li>
                                     ))
                                 }
                             </ul>
                             <div className="p-4 hotline flex lg:hidden items-center">
-                                <Image src={hotlineIcon} alt='hotline' width={18} height={18} className='mr-1' />
-                                <p className='text-lg'>
+                                <Image src={hotlineIcon} alt="hotline" width={18} height={18} className="mr-1" />
+                                <p className="text-lg">
                                     Hotline:
                                     {' '}
                                     <a href="tel:0123456789" className="font-bold text-usafa-blue">
@@ -115,8 +116,8 @@ const Header: React.FC = () => {
                     <div className="right hidden lg:flex items-center">
                         <div className="contact">
                             <div className="hotline flex items-center">
-                                <Image src={hotlineIcon} alt='hotline' width={18} height={18} className='mr-1' />
-                                <p className='text-base xl:text-lg'>
+                                <Image src={hotlineIcon} alt="hotline" width={18} height={18} className="mr-1" />
+                                <p className="text-base xl:text-lg">
                                     Hotline:
                                     {' '}
                                     <a href="tel:0123456789" className="font-bold text-usafa-blue">

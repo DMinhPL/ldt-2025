@@ -1,8 +1,9 @@
 'use client';
+
 import React, { useState } from 'react';
+import { ITEM_PER_PAGE } from '@/app/utils/constants';
 import CaseStudyCard from '../commons/CaseStudyCard';
 import Pagination from '../atoms/Pagination';
-import { ITEM_PER_PAGE } from '@/app/utils/constants';
 
 interface Props {
     data: {
@@ -28,18 +29,16 @@ const CaseStudiesPaging: React.FC<Props> = ({ data, itemsPerPage, handlePageChan
         <>
             <div className="content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
                 {
-                    currentData.map((item, index) => {
-                        return (
-                            <div
-                                key={item.id}
-                                className={`overflow-hidden ${index === 0 && currentPage === 1 ? "md:col-span-2 lg:col-span-3" : "col-span-1"
-                                    }`}
-                            >
-                                <CaseStudyCard key={index} {...item} isMain={index === 0 && currentPage === 1} />
-                            </div>
+                    currentData.map((item, index) => (
+                        <div
+                            key={item.id}
+                            className={`overflow-hidden ${index === 0 && currentPage === 1 ? 'md:col-span-2 lg:col-span-3' : 'col-span-1'
+                            }`}
+                        >
+                            <CaseStudyCard key={index} {...item} isMain={index === 0 && currentPage === 1} />
+                        </div>
 
-                        )
-                    })
+                    ))
                 }
             </div>
             {

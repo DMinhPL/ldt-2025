@@ -1,16 +1,16 @@
 'use client';
 
-import MapEmbed from "@/app/components/atoms/MapEmbed";
-import ContactForm, { ContactFormType } from "@/app/components/commons/ContactForm";
-import { ContactInfo } from "@/app/components/commons/Footer";
-import useHeaderHeight from "@/app/hooks/useHeaderHeight";
-import { contactInfo, socialLinks } from "@/app/utils/statics";
-import Image from "next/image";
+import MapEmbed from '@/app/components/atoms/MapEmbed';
+import ContactForm, { ContactFormType } from '@/app/components/commons/ContactForm';
+import { ContactInfo } from '@/app/components/commons/Footer';
+import useHeaderHeight from '@/app/hooks/useHeaderHeight';
+import { contactInfo, socialLinks } from '@/app/utils/statics';
+import Image from 'next/image';
 
 const Contact: React.FC = () => {
     const headerHeight = useHeaderHeight();
     const handleFormSubmit = (data: ContactFormType) => {
-        console.log("Form Submitted:", data);
+        console.log('Form Submitted:', data);
     };
 
     return (
@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
                 />
             </div>
         </>
-    )
+    );
 };
 
 export default Contact;

@@ -1,7 +1,8 @@
 'use client';
-import useClickOutside from "@/app/hooks/useClickOutside";
-import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+
+import useClickOutside from '@/app/hooks/useClickOutside';
+import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
 import enFlag from '../../assets/images/en-flag.png';
 import vnFlag from '../../assets/images/vn-flag.png';
 
@@ -12,8 +13,8 @@ interface Language {
 }
 
 const languages: Language[] = [
-    { code: "en", name: "English", flag: enFlag.src },
-    { code: "vn", name: "Vietnamese", flag: vnFlag.src },
+    { code: 'en', name: 'English', flag: enFlag.src },
+    { code: 'vn', name: 'Vietnamese', flag: vnFlag.src },
 ];
 
 const LanguageSwitcher: React.FC = () => {
@@ -46,6 +47,7 @@ const LanguageSwitcher: React.FC = () => {
     return (
         <div className="relative" ref={languageRef}>
             <button
+                type="button"
                 onClick={toggleDropdown}
                 className="flex items-center gap-2 pl-4 pr-8 py-2 border border-battleship-grey rounded-[5px] bg-white hover:bg-gray-100 w-full"
             >
@@ -70,11 +72,12 @@ const LanguageSwitcher: React.FC = () => {
 
             {isOpen && (
                 <div
-                    className={`absolute w-40 bg-white border rounded-md shadow-md ${isDropdownUp ? "bottom-full mb-2" : "top-full mt-2"
-                        }`}
+                    className={`absolute w-40 bg-white border rounded-md shadow-md ${isDropdownUp ? 'bottom-full mb-2' : 'top-full mt-2'
+                    }`}
                 >
                     {languages.map((lang) => (
                         <button
+                            type="button"
                             key={lang.code}
                             onClick={() => selectLanguage(lang)}
                             className="flex items-center gap-2 px-4 py-2 w-full text-left hover:bg-gray-100"

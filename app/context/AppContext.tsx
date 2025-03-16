@@ -1,7 +1,10 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from "react";
-import useWindowDimensions from "../hooks/useWindowDemensions";
-import { usePathname } from "next/navigation";
+
+import {
+    createContext, useContext, useEffect, useState,
+} from 'react';
+import { usePathname } from 'next/navigation';
+import useWindowDimensions from '../hooks/useWindowDemensions';
 
 export interface AppState {
     openMenu: boolean;
@@ -11,7 +14,7 @@ export interface AppState {
 const AppContext = createContext<AppState>({
     openMenu: false,
     setOpenMenu: () => { },
-    themeBackground: 'primary'
+    themeBackground: 'primary',
 });
 
 interface Props {
@@ -28,16 +31,16 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
     }, [width]);
 
     useEffect(() => {
-        if (pathname === "/") {
-            setThemeBackground("primary");
+        if (pathname === '/') {
+            setThemeBackground('primary');
         } else if (
-            pathname === "/about" ||
-            pathname === "/chat-ai" ||
-            pathname.startsWith("/case-studies/")
+            pathname === '/about'
+            || pathname === '/chat-ai'
+            || pathname.startsWith('/case-studies/')
         ) {
-            setThemeBackground("secondary");
+            setThemeBackground('secondary');
         } else {
-            setThemeBackground("primary");
+            setThemeBackground('primary');
         }
     }, [pathname]);
 
@@ -49,7 +52,7 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
             document.body.classList.add('bg-white');
             document.body.classList.remove('bg-floral-white');
         }
-    }, [themeBackground])
+    }, [themeBackground]);
 
     return (
         <AppContext.Provider value={{ openMenu, setOpenMenu, themeBackground }}>
@@ -59,6 +62,4 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
 };
 
 // Custom Hook to use Context
-export const useAppContext = () => {
-    return useContext(AppContext);
-};
+export const useAppContext = () => useContext(AppContext);

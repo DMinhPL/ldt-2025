@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Banner from '../components/commons/Banner';
 import Button from '../components/atoms/Button';
 import AIModuleIframe from '../components/commons/AIModuleIframe';
+import Banner from '../components/commons/Banner';
 import { SVGIcons } from '../utils/icons';
-import getHomepage from '../api/homepage';
 import { getStrapiMedia } from './utils/api-helpers';
+import homeDummyData from '../assets/dummy';
 
 export default async function Home() {
-    const { data: { banner, blocks } } = await getHomepage();
+    // const { data: { banner, blocks } } = await getHomepage();
+    const { banner, blocks } = homeDummyData;
 
     return (
         <>

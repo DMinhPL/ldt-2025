@@ -23,9 +23,11 @@ export default async function RootLayout({
     children: React.ReactNode;
     params: { lang: string };
 }>) {
+    const { lang } = await params;
+
     return (
         <AppProvider>
-            <html lang={params.lang}>
+            <html lang={lang}>
                 <body
                     className={`${interSans.className} antialiased`}
                 >

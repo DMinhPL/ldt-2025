@@ -2,12 +2,12 @@
 
 import Banner from '@/app/components/commons/Banner';
 import CaseStudiesPaging from '@/app/components/templates/CaseStudiesPaging';
-import caseBg from '../../assets/images/banner-case.png';
-import case1Img from '../../assets/images/cs-1.png';
-import case2Img from '../../assets/images/cs-2.png';
-import case3Img from '../../assets/images/cs-3.png';
-import case4Img from '../../assets/images/cs-4.png';
-import case5Img from '../../assets/images/cs-5.png';
+import caseBg from '../../../assets/images/banner-case.png';
+import case1Img from '../../../assets/images/cs-1.png';
+import case2Img from '../../../assets/images/cs-2.png';
+import case3Img from '../../../assets/images/cs-3.png';
+import case4Img from '../../../assets/images/cs-4.png';
+import case5Img from '../../../assets/images/cs-5.png';
 
 const caseData = [
     {

@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 import Image from 'next/image';
+import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 import Button from '@/app/components/atoms/Button';
-import csImg from '../../../assets/images/cs-1.png';
+import csImg from '../../../../assets/images/cs-1.png';
 
 export default function CaseStudyDetail({ params }: { params: Promise<{ caseStudyId: string }> }) {
     const headerHeight = useHeaderHeight();

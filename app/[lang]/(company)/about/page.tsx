@@ -1,11 +1,11 @@
-import Banner from '@/app/components/commons/Banner';
 import React from 'react';
 import Image from 'next/image';
 import AboutAccordion from '@/app/components/commons/AboutAccordion';
 import Button from '@/app/components/atoms/Button';
-import aboutBg from '../../assets/images/banner-about.png';
-import whatWeDoImg from '../../assets/images/whatwedo.png';
-import whyChooseUsImg from '../../assets/images/whyChooseUs.png';
+import Banner from '@/app/components/commons/Banner';
+import aboutBg from '../../../assets/images/banner-about.png';
+import whatWeDoImg from '../../../assets/images/whatwedo.png';
+import whyChooseUsImg from '../../../assets/images/whyChooseUs.png';
 
 const About = () => (
     <>

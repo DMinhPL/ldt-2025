@@ -1,14 +1,14 @@
 'use client';
 
+import Image from 'next/image';
 import Banner from '@/app/components/commons/Banner';
 import AIModuleIframe from '@/app/components/commons/AIModuleIframe';
-import Image from 'next/image';
 import useMatchHeight from '@/app/hooks/useMatchHeight';
 import Button from '@/app/components/atoms/Button';
-import chatAIBg from '../../assets/images/banner-ai.png';
-import robotIc from '../../assets/icons/ic_robot.svg';
-import telesaleIc from '../../assets/icons/ic_telesales.svg';
-import starThumbIc from '../../assets/icons/ic_starThumb.svg';
+import chatAIBg from '../../../assets/images/banner-ai.png';
+import robotIc from '../../../assets/icons/ic_robot.svg';
+import telesaleIc from '../../../assets/icons/ic_telesales.svg';
+import starThumbIc from '../../../assets/icons/ic_starThumb.svg';
 
 const whyBlocks = [
     {

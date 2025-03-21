@@ -4,6 +4,7 @@ import React, { HTMLAttributes } from 'react';
 import Image from 'next/image';
 import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 import { useAppContext } from '@/app/context/AppContext';
+import { getStrapiMedia } from '@/app/[lang]/utils/api-helpers';
 import mainBg from '../../assets/images/bg1.png';
 import homeBannerImg from '../../assets/images/banner-home.png';
 
@@ -48,7 +49,7 @@ const Banner: React.FC<Props> = ({
                     </div>
                     <div className="right lg:max-w-5/12 w-full">
                         <div className="thumbnail max-w-[259px] lg:max-w-96 xl:max-w-[486] mx-auto lg:mr-0 lg:ml-auto opacity-0 animate-fade-in">
-                            <Image src={imgSrc || homeBannerImg} alt="banner" width={486} height={483} />
+                            <Image src={getStrapiMedia(imgSrc || '') || homeBannerImg} alt="banner" width={486} height={483} />
                         </div>
                     </div>
                 </div>

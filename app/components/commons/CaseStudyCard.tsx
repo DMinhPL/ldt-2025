@@ -1,3 +1,4 @@
+import { getStrapiMedia } from '@/app/[lang]/utils/api-helpers';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -30,7 +31,7 @@ const CaseStudyCard: React.FC<Props> = ({
     return (
         <div className={cardStyles}>
             <Link href={`/case-studies/${id}`} title={title} className={thumbnailStyles}>
-                <Image src={thumbnail} alt={title} className="w-full object-cover" width={isMain ? 866 : 418} height={isMain ? 447 : 216} />
+                <Image src={getStrapiMedia(thumbnail)} alt={title} className="w-full object-cover" width={isMain ? 866 : 418} height={isMain ? 447 : 216} />
             </Link>
             <div className={infoStyles}>
                 <div className="tag text-usafa-blue text-md lg:text-lg font-medium">

@@ -12,17 +12,16 @@ interface Props {
         title: string;
         description: string;
     }[];
-    handlePageChange?: (page: number) => void;
-    itemsPerPage?: number
+    meta: StrapiMetaType;
+    itemsPerPage?: number;
 }
 
-const CaseStudiesPaging: React.FC<Props> = ({ data, itemsPerPage, handlePageChange }) => {
-    const [currentPage, setCurrentPage] = useState(1);
+const CaseStudiesPaging: React.FC<Props> = ({ data, itemsPerPage, meta }) => {
+    const [currentPage, setCurrentPage] = useState(meta.page || 1);
     const totalPages = Math.ceil(data.length / (itemsPerPage || ITEM_PER_PAGE));
     const currentData = data.slice((currentPage - 1) * (itemsPerPage || ITEM_PER_PAGE), currentPage * (itemsPerPage || ITEM_PER_PAGE));
     const onPageChange = (page: number) => {
         setCurrentPage(page);
-        handlePageChange?.(page);
     };
 
     return (

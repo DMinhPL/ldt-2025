@@ -6,12 +6,16 @@ export async function fetchAPI<T>(
     urlParamsObject = {},
     options = {},
 ): Promise<StrapiServerResponseType<T>> {
+    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+    if (!token) throw new Error('The Strapi API Token environment variable is not set.');
+
     try {
         // Merge default and user options
         const mergedOptions = {
             next: { revalidate: 60 },
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             },
             ...options,
         };
@@ -21,10 +25,12 @@ export async function fetchAPI<T>(
         const requestUrl = `${getStrapiURL(
             `/api${path}${queryString ? `?${queryString}` : ''}`,
         )}`;
-
         // Trigger API call
         const response = await fetch(requestUrl, mergedOptions);
         const data = await response.json();
+        if (data.error) {
+            console.log('Error: ', path, data.error);
+        }
 
         return data;
     } catch (error) {

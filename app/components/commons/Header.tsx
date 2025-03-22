@@ -14,7 +14,7 @@ import HeaderMenuItem from '../atoms/HeaderMenuItem';
 
 const headerMenu = [
     {
-        url: '/',
+        url: '/en',
         title: 'Home',
     },
     {

@@ -13,9 +13,11 @@ interface Props {
 const HeaderMenuItem: React.FC<Props> = ({ url, title }) => {
     const pathName = usePathname();
     const { setOpenMenu } = useAppContext();
+    const languagePrefix = pathName?.split('/')[1];
+    const isActive = (link: string) => pathName?.startsWith(`/${languagePrefix}${link}`) || link === '/';
 
     return (
-        <Link onClick={() => setOpenMenu(false)} className={`font-medium ${pathName === url ? 'text-green-ryb' : 'text-licorice'} hover:text-green-ryb text-xl lg:text-base transition-base-style lg:px-2 py-2.5`} href={url}>
+        <Link onClick={() => setOpenMenu(false)} className={`font-medium ${isActive(url) || url === pathName ? 'text-green-ryb' : 'text-licorice'} hover:text-green-ryb text-xl lg:text-base transition-base-style lg:px-2 py-2.5`} href={url}>
             {title}
         </Link>
     );

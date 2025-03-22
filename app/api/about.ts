@@ -1,18 +1,15 @@
 import { fetchAPI } from '../[lang]/utils/fetch-api';
 
-async function getHomepage(): Promise<StrapiServerResponseType<HomepageResponseType>> {
-    const path = '/homepage';
+async function getAboutPage(): Promise<StrapiServerResponseType<AboutPageResponseType>> {
+    const path = '/about-us';
 
     const urlParamsObject = {
         populate: {
             banner: {
                 fields: ['heading', 'description'],
                 populate: {
-                    link: {
-                        fields: ['text', 'url', 'isExternal'],
-                    },
                     thumbnail: {
-                        fields: ['*'],
+                        fields: ['url', 'alternativeText'],
                     },
                 },
             },
@@ -23,13 +20,18 @@ async function getHomepage(): Promise<StrapiServerResponseType<HomepageResponseT
                     },
                 },
             },
+            seo: {
+                populate: {
+                    fields: ['title'],
+                },
+            },
         },
     };
 
-    return fetchAPI<HomepageResponseType>(
+    return fetchAPI<AboutPageResponseType>(
         path,
         urlParamsObject,
     );
 }
 
-export default getHomepage;
+export default getAboutPage;

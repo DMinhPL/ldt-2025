@@ -5,11 +5,10 @@ import AIModuleIframe from '../components/commons/AIModuleIframe';
 import Banner from '../components/commons/Banner';
 import { SVGIcons } from '../utils/icons';
 import { getStrapiMedia } from './utils/api-helpers';
-import homeDummyData from '../assets/dummy';
+import getHomepage from '../api/homepage';
 
 export default async function Home() {
-    // const { data: { banner, blocks } } = await getHomepage();
-    const { banner, blocks } = homeDummyData;
+    const { data: { banner, blocks } } = await getHomepage();
 
     return (
         <>
@@ -42,9 +41,14 @@ export default async function Home() {
                         <p className="text-licorice text-lg mt-2 max-w-[920px]">
                             {blocks[1].description}
                         </p>
-                        <div className="thumbnail max-w-[1100px] xl:max-w-[1280px] mx-auto mt-10">
-                            <Image src={getStrapiMedia(blocks[1].thumbnail.url)} width={1356} height={853} alt="banner" />
-                        </div>
+                        {
+                            blocks[1].thumbnail
+                        && (
+                            <div className="thumbnail max-w-[1100px] xl:max-w-[1280px] mx-auto mt-10">
+                                <Image src={getStrapiMedia(blocks[1].thumbnail.url)} width={1356} height={853} alt="banner" />
+                            </div>
+                        )
+                        }
                         <div className="text-center">
                             <Link href="/case-studies" className="text-green-ryb font-bold text-lg lg:text-xl underline inline-flex items-center gap-2">
                                 View more Case studies

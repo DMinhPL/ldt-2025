@@ -1,49 +1,30 @@
-'use client';
-
-import Image from 'next/image';
-import Banner from '@/app/components/commons/Banner';
-import AIModuleIframe from '@/app/components/commons/AIModuleIframe';
-import useMatchHeight from '@/app/hooks/useMatchHeight';
+import getChatAIPage from '@/app/api/chatAi';
 import Button from '@/app/components/atoms/Button';
-import chatAIBg from '../../../assets/images/banner-ai.png';
-import robotIc from '../../../assets/icons/ic_robot.svg';
-import telesaleIc from '../../../assets/icons/ic_telesales.svg';
-import starThumbIc from '../../../assets/icons/ic_starThumb.svg';
+import AIModuleIframe from '@/app/components/commons/AIModuleIframe';
+import Banner from '@/app/components/commons/Banner';
+import WhyBlockItem from '@/app/components/templates/WhyBlockItem';
+import Image from 'next/image';
 
-const whyBlocks = [
-    {
-        icon: <Image src={robotIc} alt="icon" width={110} height={109} />,
-        title: 'Automate Customer Support',
-        description: 'Automate Customer Support Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s',
-    },
-    {
-        icon: <Image src={telesaleIc} alt="icon" width={100} height={109} />,
-        title: 'Assist Developers',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s',
-    },
-    {
-        icon: <Image src={starThumbIc} alt="icon" width={106} height={107} />,
-        title: 'Personalized User Experience',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s',
-    },
-];
-
-const ChatAI = () => {
-    useMatchHeight('.icon');
-    useMatchHeight('.why-heading');
+export default async function ChatAI() {
+    const { data: { banner, blocks, why_block } } = await getChatAIPage();
+    const whyBlocks = why_block.services.map((item) => ({
+        title: item.title,
+        description: item.description,
+        icon: <Image src={item.icon.url} alt={item.icon.alternativeText || ''} width={110} height={109} />,
+    }));
 
     return (
         <>
             <Banner
-                imgSrc={chatAIBg.src}
-                title="Chat AI – Experience Cutting-Edge Artificial Intelligence"
+                imgSrc={banner.thumbnail.url}
+                title={banner.heading}
             />
             {/* Who we are  */}
             <section id="who" className="py-15 lg:pt-[80px] lg:pb-0">
                 <div className="container mx-auto">
                     <div className="content text-center">
                         <h2 className="text-3xl lg:text-[40px] xl:text-[55px] text-raisin-black">
-                            Experience Chat LDT AI Now
+                            {blocks.heading}
                         </h2>
                         <AIModuleIframe />
                     </div>
@@ -54,21 +35,13 @@ const ChatAI = () => {
                 <div className="container mx-auto">
                     <div className="content flex flex-wrap">
                         <h2 className="text-3xl text-center lg:text-left lg:text-[40px] text-raisin-black lg:w-4/12 w-full">
-                            Why Should You Use Chat AI?
+                            {why_block.heading}
                         </h2>
                         <div className="info lg:w-8/12 lg:pl-10 xl:pl-20 mt-9 lg:mt-0">
                             <div className="grid lg:grid-cols-3 gap-4">
                                 {
                                     whyBlocks.map((item, index) => (
-                                        <div key={index} className="gap-5 flex flex-col lg:block items-center mb-2 lg:mb-0">
-                                            <div className="icon">
-                                                {item.icon}
-                                            </div>
-                                            <div className="mt-3 text-center lg:text-left">
-                                                <h3 className="text-xl font-bold why-heading">{item.title}</h3>
-                                                <p className="text-lg">{item.description}</p>
-                                            </div>
-                                        </div>
+                                        <WhyBlockItem key={index} {...item} />
                                     ))
                                 }
                             </div>
@@ -91,6 +64,4 @@ const ChatAI = () => {
             </section>
         </>
     );
-};
-
-export default ChatAI;
+}

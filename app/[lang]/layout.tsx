@@ -1,11 +1,11 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Head from 'next/head';
 import Footer from '../components/commons/Footer';
 import Header from '../components/commons/Header';
 import { AppProvider } from '../context/AppContext';
 import '../globals.css';
-import Head from 'next/head';
 
 const interSans = Inter({
     variable: '--font-geist-sans',

@@ -45,13 +45,16 @@ const Header: React.FC = () => {
     const burgerMenuState = width < 1024 ? openMenu ? 'transform translate-x-0' : 'transform translate-x-full' : undefined;
 
     useEffect(() => {
+        let ticking = false;
+
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY > 30) {
-                setFixedMenu(true);
-            } else {
-                setFixedMenu(false);
-            }
+            if (ticking) return;
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                setFixedMenu(window.scrollY > 30);
+                ticking = false;
+            });
         };
 
         handleScroll();

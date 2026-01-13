@@ -24,6 +24,7 @@ const CTASection: React.FC<CTASectionProps> = ({
                     {description}
                 </p>
                 <div className="cta flex justify-center mt-[29px]">
+                    {/* Note: Button width (191px) matches design system. Consider moving to CSS variable in future */}
                     <Button className="max-w-[191px]">
                         {buttonText}
                     </Button>

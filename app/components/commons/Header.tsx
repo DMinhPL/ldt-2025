@@ -38,7 +38,6 @@ const headerMenu = [
 const Header: React.FC = () => {
     const { openMenu, setOpenMenu, themeBackground } = useAppContext();
     const { width } = useWindowDimensions();
-    const [scrollY, setScrollY] = useState(0);
     const [fixedMenu, setFixedMenu] = useState(false);
     const headerHeight = useHeaderHeight();
     const background = themeBackground === 'primary' ? 'bg-floral-white' : 'bg-floral-white lg:bg-white';
@@ -53,15 +52,15 @@ const Header: React.FC = () => {
             } else {
                 setFixedMenu(false);
             }
-            setScrollY(currentScrollY);
         };
 
+        handleScroll();
         window.addEventListener('scroll', handleScroll);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [scrollY]);
+    }, []);
 
     return (
         <header className={`o-header ${fixedMenu ? background : `${background} lg:bg-transparent`} fixed top-0 left-0 w-full z-50`}>

@@ -5,6 +5,7 @@ import React from 'react';
 import logo from '../../assets/images/logo.png';
 import Button from '../atoms/Button';
 import LanguageSwitcher from '../atoms/LanguageSwitcher';
+import SocialLinks from '../atoms/SocialLinks';
 
 /** Reusable Contact Info Component */
 export const ContactInfo: React.FC<{ title: string; info: { href?: string; icon: string; text: string }[] }> = ({ title, info }) => (
@@ -69,13 +70,7 @@ const Footer: React.FC = () => (
                     <Link href="/">
                         <Image src={logo} alt="Company Logo" width={121} height={49} />
                     </Link>
-                    <div className="flex gap-7 items-center mt-4 lg:mt-14">
-                        {socialLinks.map(({ href, icon, alt }) => (
-                            <a key={alt} href={href} target="_blank" rel="noopener noreferrer">
-                                <Image src={icon} alt={alt} width={20} height={20} />
-                            </a>
-                        ))}
-                    </div>
+                    <SocialLinks links={socialLinks} className="mt-4 lg:mt-14" />
                 </div>
 
                 {/* Contact Information */}

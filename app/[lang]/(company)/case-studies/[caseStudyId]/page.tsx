@@ -3,7 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import useHeaderHeight from '@/app/hooks/useHeaderHeight';
-import Button from '@/app/components/atoms/Button';
+import CTASection from '@/app/components/commons/CTASection';
+import ContentImageBlock from '@/app/components/commons/ContentImageBlock';
 import csImg from '../../../../assets/images/cs-1.png';
 
 export default function CaseStudyDetail({ params }: { params: Promise<{ caseStudyId: string }> }) {
@@ -39,70 +40,32 @@ export default function CaseStudyDetail({ params }: { params: Promise<{ caseStud
                     </p>
                 </div>
                 {/* line 1 */}
-                <div className="flex gap-4 mt-14">
-                    <div className="rounded-3xl overflow-hidden flex-1/2 h-full">
-                        <Image src={csImg.src} className="object-cover w-full" width={641} height={531} alt="idfjlk" />
-                    </div>
-                    <div className="content flex-1/2">
-                        <div className="max-w-96 mx-auto">
-                            <h2 className="text-3xl">Lorem Ipsum is simply dummy text of the printing and typesetting</h2>
-                            <p className="text-lg mt-4">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                aLorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <ContentImageBlock
+                    imageSrc={csImg.src}
+                    imagePosition="left"
+                    title="Lorem Ipsum is simply dummy text of the printing and typesetting"
+                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make aLorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    imageAlt="case study"
+                />
                 {/* line 2 */}
-                <div className="flex gap-4 mt-14">
-                    <div className="content flex-1/2">
-                        <div className="max-w-96 mx-auto">
-                            <h2 className="text-3xl">Lorem Ipsum is simply dummy text of the printing and typesetting</h2>
-                            <p className="text-lg mt-4">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                aLorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="rounded-3xl overflow-hidden flex-1/2 h-full">
-                        <Image src={csImg.src} className="object-cover w-full" width={641} height={531} alt="idfjlk" />
-                    </div>
-                </div>
+                <ContentImageBlock
+                    imageSrc={csImg.src}
+                    imagePosition="right"
+                    title="Lorem Ipsum is simply dummy text of the printing and typesetting"
+                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make aLorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    imageAlt="case study"
+                />
                 {/* line 3 */}
-                <div className="flex gap-4 mt-14">
-                    <div className="rounded-3xl overflow-hidden flex-1/2 h-full">
-                        <Image src={csImg.src} className="object-cover w-full" width={641} height={531} alt="idfjlk" />
-                    </div>
-                    <div className="content flex-1/2">
-                        <div className="max-w-96 mx-auto">
-                            <h2 className="text-3xl">Lorem Ipsum is simply dummy text of the printing and typesetting</h2>
-                            <p className="text-lg mt-4">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s
-                                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                aLorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <ContentImageBlock
+                    imageSrc={csImg.src}
+                    imagePosition="left"
+                    title="Lorem Ipsum is simply dummy text of the printing and typesetting"
+                    description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make aLorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    imageAlt="case study"
+                />
 
             </div>
-            <div className="content py-14 bg-white-smoke">
-                <div className="container mx-auto">
-                    <h2 className="text-3xl text-center lg:text-[40px] text-raisin-black">
-                        Want to chat about your dream project?
-                    </h2>
-                    <p className="text-licorice text-lg mt-2 text-center">
-                        Schedule a free project consultation with one of our solutions architects today!
-                    </p>
-                    <div className="cta max-w-[191px] mx-auto mt-6">
-                        <Button>
-                            Schedule Now!
-                        </Button>
-                    </div>
-                </div>
-            </div>
+            <CTASection className="py-14 bg-white-smoke" />
         </div>
     );
 }

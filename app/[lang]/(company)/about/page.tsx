@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import AboutAccordion from '@/app/components/commons/AboutAccordion';
-import Button from '@/app/components/atoms/Button';
 import Banner from '@/app/components/commons/Banner';
+import CTASection from '@/app/components/commons/CTASection';
 import aboutBg from '../../../assets/images/banner-about.png';
 import whatWeDoImg from '../../../assets/images/whatwedo.png';
 import whyChooseUsImg from '../../../assets/images/whyChooseUs.png';
@@ -77,23 +77,7 @@ const About = () => (
             </div>
         </section>
         {/* Want to chat  */}
-        <section id="wantTo" className="py-[80px] bg-floral-white">
-            <div className="container mx-auto">
-                <div className="content text-center">
-                    <h2 className="text-3xl lg:text-[40px] text-raisin-black">
-                        Want to chat about your dream project?
-                    </h2>
-                    <p className="text-licorice text-lg mt-2">
-                        Schedule a free project consultation with one of our solutions architects today!
-                    </p>
-                    <div className="cta flex justify-center mt-[29px]">
-                        <Button className="max-w-[191px]">
-                            Schedule Now!
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <CTASection />
     </>
 );
 

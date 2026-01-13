@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import Banner from '@/app/components/commons/Banner';
 import AIModuleIframe from '@/app/components/commons/AIModuleIframe';
+import CTASection from '@/app/components/commons/CTASection';
 import useMatchHeight from '@/app/hooks/useMatchHeight';
-import Button from '@/app/components/atoms/Button';
 import chatAIBg from '../../../assets/images/banner-ai.png';
 import robotIc from '../../../assets/icons/ic_robot.svg';
 import telesaleIc from '../../../assets/icons/ic_telesales.svg';
@@ -75,17 +75,7 @@ const ChatAI = () => {
                         </div>
                     </div>
                     <div className="content mt-10 lg:mt-20">
-                        <h2 className="text-3xl text-center lg:text-[40px] text-raisin-black">
-                            Want to chat about your dream project?
-                        </h2>
-                        <p className="text-licorice text-lg mt-2 text-center">
-                            Schedule a free project consultation with one of our solutions architects today!
-                        </p>
-                        <div className="cta max-w-[191px] mx-auto mt-6">
-                            <Button>
-                                Schedule Now!
-                            </Button>
-                        </div>
+                        <CTASection className="py-0" />
                     </div>
                 </div>
             </section>

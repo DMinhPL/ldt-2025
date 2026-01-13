@@ -52,48 +52,6 @@ const caseData = [
         title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
     },
-    {
-        id: 1,
-        thumbnail: case1Img.src,
-        title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
-    {
-        thumbnail: case2Img.src,
-        id: 2,
-        title: 'Revolutionizing Human Resource Management: Our Journey in Software Development',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
-    {
-        thumbnail: case3Img.src,
-        id: 3,
-        title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
-    {
-        thumbnail: case4Img.src,
-        id: 4,
-        title: 'Revolutionizing Human Resource Management: Our Journey in Software Development',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
-    {
-        thumbnail: case5Img.src,
-        id: 5,
-        title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
-    {
-        thumbnail: case1Img.src,
-        id: 6,
-        title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
-    {
-        thumbnail: case3Img.src,
-        id: 7,
-        title: 'Chat AI solution for Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a',
-    },
 ];
 
 const CaseStudies: React.FC = () => {

@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import MapEmbed from '@/app/components/atoms/MapEmbed';
 import ContactForm, { ContactFormType } from '@/app/components/commons/ContactForm';
 import { ContactInfo } from '@/app/components/commons/Footer';
+import SocialLinks from '@/app/components/atoms/SocialLinks';
 import useHeaderHeight from '@/app/hooks/useHeaderHeight';
 import { contactInfo, socialLinks } from '@/app/utils/statics';
 
@@ -31,13 +31,7 @@ const Contact: React.FC = () => {
                         </div>
                         <div className="mt-7 lg:mt-6">
                             <h4 className="font-bold text-xl">Follow us on social media</h4>
-                            <div className="flex gap-7 items-center mt-4">
-                                {socialLinks.map(({ href, icon, alt }) => (
-                                    <a key={alt} href={href} target="_blank" rel="noopener noreferrer">
-                                        <Image src={icon} alt={alt} width={20} height={20} />
-                                    </a>
-                                ))}
-                            </div>
+                            <SocialLinks links={socialLinks} className="mt-4" />
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = { entry: CollectionEntry<'blogs'> };
+const { entry } = Astro.props;
+
+const { title, description, pubDate } = entry.data;
+
+// Canonical url for SEO (works in build)
+const canonical = new URL(
+  `/blogs/${entry.slug}`,
+  Astro.site ?? Astro.url.origin,
+);
+const { slug } = Astro.params;
+console.log({ slug });
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width' />
+    <title>{title}</title>
+    {description && <meta name='description' content={description} />}
+    <link rel='canonical' href={canonical.href} />
+  </head>
+
+  <body class='blog-layout'>
+    <main style='max-width: 820px; margin: 0 auto; padding: 24px;'>
+      <a href='/blogs'>← Back to blogs</a>
+      <h1>{title}</h1>
+      <p>
+        <time datetime={pubDate.toISOString()}>
+          {pubDate.toLocaleDateString()}
+        </time>
+      </p>
+
+      <article>
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>

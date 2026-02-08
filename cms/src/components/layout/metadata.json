@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_layout_metadata",
+  "info": {
+    "displayName": "Metadata",
+    "icon": "seed"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "keywords": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "canonical_url": {
+      "type": "string"
+    },
+    "og_title": {
+      "type": "string"
+    },
+    "og_description": {
+      "type": "string"
+    },
+    "og_image": {
+      "type": "text"
+    },
+    "og_type": {
+      "type": "string"
+    }
+  }
+}

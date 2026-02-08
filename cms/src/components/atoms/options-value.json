@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_atoms_options_values",
+  "info": {
+    "displayName": "Options value"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

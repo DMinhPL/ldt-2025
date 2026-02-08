@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_atoms_links",
+  "info": {
+    "displayName": "Link",
+    "icon": "code",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "icons": {
+      "type": "string"
+    }
+  }
+}

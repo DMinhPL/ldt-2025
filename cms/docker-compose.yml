@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  ldt-cms-staging:
+    image: locroi.local:8443/ldt-cms_stag_runner
+    container_name: ldt_cms_stag_runner
+    ports:
+      - "9028:1337"
+    environment:
+      - DATABASE_PASSWORD=sb7h0t82ry
+      - NODE_ENV=production
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=prod.local
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=ldt_dev
+      - DATABASE_USERNAME=ldt_dev_admin
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - NODE_VERSION=14.16.0
+      - YARN_VERSION=1.22.5
+      - JWT_SECRET=/lNL4qfefjCxXrhlcqLhCg==
+      - APP_KEYS=5EfRAd7Vi3eCLe8wcp1GAw==,nIyAsFM7ir4S+e6J/W3NbA==,+UkbwMPsgrVEHd7oiqUMRg==,E+cqQsQVgdkiFdJVbkbocw==
+      - API_TOKEN_SALT=jq5J7ipdbS6rfDjXbhHyLA==
+      - ADMIN_JWT_SECRET=hr6xJx8D6tk2bDm2+Jpbgg==
+      - TRANSFER_TOKEN_SALT=RBaCdGoiGDpclTWSX9KjlA==
+    extra_hosts:
+      - "prod.local:172.31.23.18"
+    volumes:
+      - /cms-dev/ldt-cms/public/uploads:/app/dist/public/uploads
+      - /cms-dev/ldt-cms/public/uploads:/app/public/uploads
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: start-first
+
+  ldt-cms-fe-staging:
+    image: locroi.local:8443/ldt-cms-fe_stag_runner
+    container_name: ldt_cms_fe_stag_runner
+    ports:
+      - "9029:3000"
+    environment:
+      - NODE_ENV=production
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - NODE_VERSION=14.16.0
+      - YARN_VERSION=1.22.5
+
+    extra_hosts:
+      - "prod.local:172.31.23.18"
+      - "locroi.local:172.31.23.18"
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: start-first

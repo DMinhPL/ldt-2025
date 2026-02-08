@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_layout_content_panels",
+  "info": {
+    "displayName": "Content Panel",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "tag": {
+      "type": "string"
+    }
+  }
+}

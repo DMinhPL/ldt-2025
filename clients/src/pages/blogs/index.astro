@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import TopBar from '../../components/TopBar';
+
+const posts = (await getCollection('blogs'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const title = 'Blog';
+const description = 'Articles about Astro, performance, and engineering.';
+const canonical = new URL('/blogs', Astro.site ?? Astro.url.origin);
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width' />
+
+    <title>{title}</title>
+    <meta name='description' content={description} />
+    <link rel='canonical' href={canonical.href} />
+
+    <!-- Open Graph -->
+    <meta property='og:type' content='website' />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:url' content={canonical.href} />
+
+    <!-- Twitter -->
+    <meta name='twitter:card' content='summary' />
+    <meta name='twitter:title' content={title} />
+    <meta name='twitter:description' content={description} />
+
+    <!-- Optional: robots -->
+    <meta name='robots' content='index,follow' />
+  </head>
+  <body>
+    <main style='max-width: 820px; margin: 0 auto; padding: 24px;'>
+      <h1>Blogs</h1>
+      <TopBar client:only='react' />
+      <ul>
+        {
+          posts.map((p) => (
+            <li>
+              <a href={`/blogs/${p.slug}`}>{p.data.title}</a>
+              {'-'}
+              <small>{p.data.pubDate.toLocaleDateString()}</small>
+              {p.data.description && <p>{p.data.description}</p>}
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </body>
+</html>

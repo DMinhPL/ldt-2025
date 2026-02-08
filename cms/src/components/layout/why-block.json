@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_layout_why_blocks",
+  "info": {
+    "displayName": "Why block"
+  },
+  "options": {},
+  "attributes": {
+    "services": {
+      "type": "component",
+      "repeatable": true,
+      "component": "atoms.our-services"
+    },
+    "heading": {
+      "type": "string"
+    }
+  }
+}

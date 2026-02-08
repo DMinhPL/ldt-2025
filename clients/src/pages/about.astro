@@ -1,0 +1,15 @@
+---
+import AboutTemplate from '../components/templates/AboutTemplate.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'vi' } }];
+}
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<Layout>
+  <AboutTemplate lang={lang} />
+</Layout>

@@ -1,0 +1,42 @@
+---
+/**
+ * Sets CSS variable: --header-height (px)
+ * Reads from element: .o-header
+ */
+const selector = '.o-header';
+const cssVar = '--header-height';
+---
+
+<script type='module' define:vars={{ selector, cssVar }}>
+  const update = () => {
+    const header = document.querySelector(selector);
+    if (!header) return;
+
+    const h = header.clientHeight || 0;
+    document.documentElement.style.setProperty(cssVar, `${h}px`);
+  };
+
+  // initial
+  update();
+
+  // your original listens on scroll; adding resize is usually better too
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+
+  // If header height changes due to dynamic content (menu open), this helps
+  const header = document.querySelector(selector);
+  let ro;
+  if (header && 'ResizeObserver' in window) {
+    ro = new ResizeObserver(update);
+    ro.observe(header);
+  }
+
+  // cleanup (useful with view transitions / client navigation)
+  const cleanup = () => {
+    window.removeEventListener('scroll', update);
+    window.removeEventListener('resize', update);
+    ro?.disconnect();
+  };
+
+  window.addEventListener('beforeunload', cleanup);
+</script>

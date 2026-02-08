@@ -1,0 +1,79 @@
+---
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const pathname = Astro.url.pathname;
+const isActive = (path: string) => {
+  const url = translatePath(path);
+  return pathname === url || pathname === `${url}/`;
+};
+---
+
+<nav aria-label='Primary'>
+  <ul class='nav'>
+    <li>
+      <a
+        href={translatePath('/')}
+        aria-current={isActive('/') ? 'page' : undefined}
+      >
+        {t('menu.home')}
+      </a>
+    </li>
+    <li>
+      <a
+        href={translatePath('/case-studies')}
+        aria-current={isActive('/case-studies') ? 'page' : undefined}
+      >
+        {t('menu.caseStudies')}
+      </a>
+    </li>
+
+    <li>
+      <a
+        href={translatePath('/about')}
+        aria-current={isActive('/about') ? 'page' : undefined}
+      >
+        {t('menu.aboutUs')}
+      </a>
+    </li>
+
+    <li>
+      <a
+        href={translatePath('/contact')}
+        aria-current={isActive('/contact') ? 'page' : undefined}
+      >
+        {t('menu.contact')}
+      </a>
+    </li>
+
+    <li>
+      <a
+        href={translatePath('/agentic-ai')}
+        aria-current={isActive('/agentic-ai') ? 'page' : undefined}
+      >
+        {t('menu.chatAi')}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  a[aria-current='page'] {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+</style>

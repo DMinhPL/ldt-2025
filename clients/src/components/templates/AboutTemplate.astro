@@ -1,0 +1,57 @@
+---
+import { useTranslations } from '../../i18n/utils';
+
+type Props = {
+  lang: 'en' | 'vi';
+  canonical?: string;
+  alternates?: { lang: 'en' | 'vi'; href: string }[];
+};
+
+const { lang, canonical, alternates = [] } = Astro.props;
+console.log('AboutTemplate lang:', lang);
+const t = useTranslations(lang);
+---
+
+<html lang={lang === 'vi' ? 'vi' : 'en'}>
+  <!-- <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width' />
+
+    <title>{t.title}</title>
+    <meta name='description' content={t.desc} />
+
+    {canonical && <link rel='canonical' href={canonical} />}
+
+    {
+      alternates.map((a) => (
+        <link rel='alternate' href={a.href} hreflang={a.lang} />
+      ))
+    }
+    {/* Optional: default language */}
+    {
+      alternates.length > 0 && (
+        <link rel='alternate' href={alternates[0].href} hreflang='x-default' />
+      )
+    }
+  </head> -->
+
+  <body>
+    <nav style='display:flex; gap:12px; padding:12px 0;'>
+      <a href='/' aria-current={lang === 'en' ? 'page' : undefined}>Home</a>
+      <a href='/about' aria-current={lang === 'en' ? 'page' : undefined}
+        >English</a
+      >
+      <a
+        href='/vi/ve-chung-toi'
+        aria-current={lang === 'vi' ? 'page' : undefined}>Tiếng Việt</a
+      >
+    </nav>
+
+    <main style='max-width: 820px; margin: 0 auto; padding: 24px;'>
+      <h1>{t('menu.aboutUs')}</h1>
+
+      <hr />
+      <p><small>Current lang: <strong>{lang}</strong></small></p>
+    </main>
+  </body>
+</html>

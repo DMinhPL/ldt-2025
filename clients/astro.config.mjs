@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
 import preact from '@astrojs/preact';
 import tailwindcss from '@tailwindcss/vite';
@@ -17,4 +17,15 @@ export default defineConfig({
       include: ['**/react/*'],
     }),
   ],
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Inter',
+        cssVariable: '--font-inter',
+        weights: ['400 700'],
+        subsets: ['latin'],
+      },
+    ],
+  },
 });

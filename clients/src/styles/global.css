@@ -1,1 +1,77 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1312px;
+
+  --text-xs: 0.625rem; /* 10px  */
+  --text-sm: 0.75rem; /* 12px  */
+  --text-md: 0.875rem; /* 14px  */
+  --text-base: 1rem; /* 16px  */
+  --text-lg: 1.125rem; /* 18px  */
+  --text-xl: 1.25rem; /* 20px  */
+  --text-2xl: 1.5rem; /* 24px  */
+  --text-3xl: 2rem; /* 32px  */
+  --text-4xl: 2.5rem; /* 40px  */
+  --text-5xl: 3rem; /* 48px  */
+
+  --color-licorice: #151515;
+  --color-green-ryb: #51aa35;
+  --color-green-ryb-opacity: #51aa350d;
+  --color-sap-green: #408929;
+  --color-floral-white: #fdf8f5;
+  --color-usafa-blue: #004f97;
+  --color-deep-lemon: #ffb91d;
+  --color-timberwolf: #ded9d6;
+  --color-raisin-black: #222222;
+  --color-battleship-grey: #838383;
+  --color-pastel-gray: #cbcbcb;
+  --color-white-smoke: #f6fbf4;
+  --color-silver-chalice: #acacac;
+  --color-ash-grey: #b3b3b3;
+  --color-quartz: #4b4b4b;
+}
+
+@layer components {
+  .button-base-style {
+    @apply rounded-[5px] text-[20px] font-bold px-7 py-2 duration-300 ease-in-out transition-all;
+  }
+  .transition-base-style {
+    @apply duration-300 ease-in-out transition-all;
+  }
+
+  .container {
+    @apply px-4;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+body,
+html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}

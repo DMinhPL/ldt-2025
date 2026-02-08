@@ -1,0 +1,25 @@
+---
+import Font from 'astro/components/Font.astro';
+import LanguagePicker from '../components/molecules/LanguagePicker.astro';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+console.log('Base lang:', lang);
+---
+
+<Font cssVariable='--font-inter' preload />
+
+<html lang={lang}>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <title>Long Duong Thuan Ltd Astro</title>
+  </head>
+  <body>
+    <slot />
+    <footer>
+      <LanguagePicker />
+    </footer>
+  </body>
+</html>

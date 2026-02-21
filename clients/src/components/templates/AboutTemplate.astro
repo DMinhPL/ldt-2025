@@ -2,9 +2,9 @@
 import { useTranslations } from '../../i18n/utils';
 
 type Props = {
-  lang: 'en' | 'vi';
+  lang: 'en' | 'vi-VN';
   canonical?: string;
-  alternates?: { lang: 'en' | 'vi'; href: string }[];
+  alternates?: { lang: 'en' | 'vi-VN'; href: string }[];
 };
 
 const { lang, canonical, alternates = [] } = Astro.props;
@@ -12,13 +12,13 @@ console.log('AboutTemplate lang:', lang);
 const t = useTranslations(lang);
 ---
 
-<html lang={lang === 'vi' ? 'vi' : 'en'}>
-  <!-- <head>
+<html lang={lang === 'vi-VN' ? 'vi-VN' : 'en'}>
+  <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width' />
 
-    <title>{t.title}</title>
-    <meta name='description' content={t.desc} />
+    <!-- <title>{t.title}</title>
+    <meta name='description' content={t.desc} /> -->
 
     {canonical && <link rel='canonical' href={canonical} />}
 
@@ -33,7 +33,7 @@ const t = useTranslations(lang);
         <link rel='alternate' href={alternates[0].href} hreflang='x-default' />
       )
     }
-  </head> -->
+  </head>
 
   <body>
     <nav style='display:flex; gap:12px; padding:12px 0;'>
@@ -43,7 +43,7 @@ const t = useTranslations(lang);
       >
       <a
         href='/vi/ve-chung-toi'
-        aria-current={lang === 'vi' ? 'page' : undefined}>Tiếng Việt</a
+        aria-current={lang === 'vi-VN' ? 'page' : undefined}>Tiếng Việt</a
       >
     </nav>
 

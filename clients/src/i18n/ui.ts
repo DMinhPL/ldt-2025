@@ -1,6 +1,6 @@
 export const languages = {
   en: 'English',
-  vi: 'Vietnamese',
+  'vi-VN': 'Vietnamese',
 };
 
 export const defaultLang = 'en';
@@ -41,7 +41,7 @@ export const ui = {
     },
   },
 
-  vi: {
+  'vi-VN': {
     general: {
       submitYourRequest: "Gửi yêu cầu",
       yourName: "Tên của bạn",
@@ -79,9 +79,17 @@ export const ui = {
 export const routes = {
   en: {
     'about': 'about',
+    'agentic-ai': 'agentic-ai',
+    'case-studies': 'case-studies',
+    'chat-ai': 'chat-ai',
+    'contact': 'contact',
   },
-  vi: {
+  'vi-VN': {
     'about': 've-chung-toi',
+    'agentic-ai': 'agentic-ai',
+    'case-studies': 'du-an-tieu-bieu',
+    'chat-ai': 'chat-ai',
+    'contact': 'lien-he',
   },
 }
 

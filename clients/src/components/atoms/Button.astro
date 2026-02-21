@@ -1,72 +1,81 @@
 ---
-import classNames from "classnames";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-type Variants = "primary" | "secondary";
-type Size = "base" | "sm";
+import classNames from 'classnames';
 
-type Props = {
-  children?: any; // Astro slot content
+type Variants = 'primary' | 'secondary';
+type Size = 'base' | 'sm';
+
+export interface Props {
   className?: string;
   variants?: Variants;
   size?: Size;
   loading?: boolean;
-  link?: string;
-  type?: "button" | "submit" | "reset";
   disabled?: boolean;
-} & Record<string, any>;
+  type?: 'button' | 'submit' | 'reset';
+  link?: string;
+
+  // allow passing attributes (button or anchor) without being too strict
+  [key: string]: any;
+}
 
 const {
-  className = "",
-  variants = "primary",
-  size = "base",
+  className,
+  variants = 'primary',
+  size = 'base',
   loading = false,
-  link,
-  type = "button",
   disabled = false,
+  type = 'button',
+  link,
   ...rest
 } = Astro.props;
 
-const isDisabled = Boolean(disabled || loading);
+const isDisabled = disabled || loading;
 
-// Keep your baseClasses logic exactly (check "w-")
-const baseClasses = className?.includes("w-")
-  ? "a-button button-base-style rounded-sm px-2"
-  : "a-button px-2 button-base-style w-full";
+const baseClasses = className?.includes('w-')
+  ? 'a-button button-base-style rounded-sm px-2'
+  : 'a-button px-2 button-base-style w-full';
 
 const buttonClass = classNames(baseClasses, {
-  "bg-deep-lemon opacity-30 text-white pointer-events-none border-0": isDisabled,
-  "bg-green-ryb text-white hover:bg-sap-green": !isDisabled && variants === "primary",
-  "h-[45px]": size === "base",
-  "h-[30px]": size === "sm",
+  'bg-deep-lemon opacity-30 text-white pointer-events-none border-0':
+    isDisabled,
+  'bg-green-ryb text-white hover:bg-sap-green':
+    !isDisabled && variants === 'primary',
+  'h-[45px]': size === 'base',
+  'h-[30px]': size === 'sm',
 });
 ---
 
-<button
-  type={type}
-  disabled={isDisabled || loading}
-  class={`${buttonClass} ${className}`}
-  data-link={link}
-  {...rest}
->
-  {loading ? (
-    <div class="flex items-center justify-center h-]">
-      <div class="animate-spin rounded-full w-4 h-4 border-4 border-white border-t-transparent" />
-    </div>
+{
+  link ? (
+    <a
+      href={link}
+      class={`${buttonClass} ${className ?? ''} block text-center font-semibold`}
+      aria-disabled={isDisabled ? 'true' : 'false'}
+      {...rest}
+    >
+      {loading ? (
+        <span class='flex items-center justify-center'>
+          <span class='animate-spin rounded-full w-4 h-4 border-4 border-white border-t-transparent' />
+        </span>
+      ) : (
+        <slot />
+      )}
+    </a>
   ) : (
-    <slot />
-  )}
-</button>
-
-{link && !isDisabled && (
-  <script type="module">
-    const btn = document.currentScript?.previousElementSibling;
-    if (btn instanceof HTMLButtonElement) {
-      const href = btn.dataset.link;
-      btn.addEventListener("click", (e) => {
-        if (!href) return;
-        // Similar to router.push(link)
-        window.location.href = href;
-      });
-    }
-  </script>
-)}
+    <button
+      type={type}
+      disabled={isDisabled}
+      class={`${buttonClass} ${className ?? ''} block text-center font-semibold`}
+      {...rest}
+    >
+      {loading ? (
+        <span class='flex items-center justify-center'>
+          <span class='animate-spin rounded-full w-4 h-4 border-4 border-white border-t-transparent' />
+        </span>
+      ) : (
+        <slot />
+      )}
+    </button>
+  )
+}

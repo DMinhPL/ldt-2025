@@ -1,0 +1,40 @@
+---
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import HeaderIsland from './HeaderIsland';
+import type { ThemeBackground } from '../../../stores';
+import Button from '../../atoms/Button.astro';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { useTranslatedPath, useTranslations } from '../../../i18n/utils';
+
+interface Props {
+  children?: any; // Astro slot content
+  lang: 'en' | 'vi-VN';
+  pathname: string;
+  theme: ThemeBackground; // align with ThemeBackground if needed
+}
+const container = await AstroContainer.create();
+const t = useTranslations(Astro.props.lang);
+const translatePath = useTranslatedPath(Astro.props.lang);
+
+// Render Astro Button to HTML string, then pass to React island
+
+const ctaHTML = await container.renderToString(Button, {
+  slots: {
+    default: t('general.getStarted'),
+  },
+  props: {
+    link: translatePath('/contact'),
+  },
+});
+
+const { lang, pathname, theme } = Astro.props;
+---
+
+<HeaderIsland
+  lang={lang}
+  pathname={pathname}
+  theme={theme}
+  client:load
+  ctaHTML={ctaHTML}
+/>

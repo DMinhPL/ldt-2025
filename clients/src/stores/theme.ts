@@ -12,7 +12,9 @@ onMount(theme, () => {
   try {
     const saved = localStorage.getItem("theme");
     if (isTheme(saved)) theme.set(saved);
-  } catch { }
+  } catch {
+    // localStorage may not be available
+  }
 
   const apply = (t: Theme) => {
     // Option A: use data-theme for CSS
@@ -28,7 +30,9 @@ onMount(theme, () => {
     apply(t);
     try {
       localStorage.setItem("theme", t);
-    } catch { }
+    } catch {
+      // localStorage may not be available
+    }
   });
 
   // cross-tab sync

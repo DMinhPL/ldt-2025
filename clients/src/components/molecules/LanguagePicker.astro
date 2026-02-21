@@ -8,7 +8,7 @@ const route = getRouteFromUrl(Astro.url);
 <ul>
   {
     Object.entries(languages).map(([lang, label]) => {
-      const translatePath = useTranslatedPath(lang as 'en' | 'vi');
+      const translatePath = useTranslatedPath(lang as 'en' | 'vi-VN');
       return (
         <li>
           <a href={translatePath(`/${route ? route : ''}`)}>{label}</a>

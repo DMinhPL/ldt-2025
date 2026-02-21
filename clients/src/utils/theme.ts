@@ -9,5 +9,6 @@ export function getThemeBackgroundFromPath(
   }
 
   const secondaryRoutes = ["/about", "/agentic-ai", "/case-studies", "/contact"];
+
   return secondaryRoutes.some((p) => pathname.includes(p)) ? "secondary" : "primary";
 }

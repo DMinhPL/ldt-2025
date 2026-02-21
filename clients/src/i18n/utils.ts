@@ -1,4 +1,5 @@
-import { ui, defaultLang, showDefaultLang, routes, type Lang } from './ui';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { defaultLang, routes, showDefaultLang, ui } from './ui';
 
 type Primitive = string | number | boolean | null | undefined;
 
@@ -25,24 +26,26 @@ function deepGet(obj: any, path: string) {
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/');
   if (lang in ui) return lang as keyof typeof ui;
+
   return defaultLang;
 }
 
-export function useTranslations(lang: 'en' | 'vi') {
+export function useTranslations(lang: 'en' | 'vi-VN') {
   return function t(key: TranslationKey): string {
     const value = deepGet(ui[lang], key);
     if (typeof value !== "string") {
       // Fallback: show key to make missing translations obvious
       return key;
     }
+
     return value;
   };
 }
 
 export function useTranslatedPath(lang: keyof typeof ui) {
-  return function translatePath(path: string, l: string = lang) {
-    const pathName = path.replaceAll('/', '')
-    const hasTranslation = defaultLang !== l && routes[l] !== undefined && routes[l][pathName] !== undefined
+  return function translatePath(path: string, l: keyof typeof routes = lang) {
+    const pathName = path.replaceAll('/', '') as keyof typeof routes[typeof defaultLang];
+    const hasTranslation = defaultLang !== l && routes[l]?.[pathName] !== undefined
     const translatedPath = hasTranslation ? '/' + routes[l][pathName] : path
 
     return !showDefaultLang && l === defaultLang ? translatedPath : `/${l}${translatedPath}`
@@ -52,7 +55,7 @@ export function useTranslatedPath(lang: keyof typeof ui) {
 export function getRouteFromUrl(url: URL): string | undefined {
   const pathname = new URL(url).pathname;
   const parts = pathname?.split('/');
-  const path = parts.pop() || parts.at(-1);
+  const path = (parts.pop() || parts.at(-1)) as keyof typeof routes[typeof defaultLang];
 
   if (path === undefined) {
     return undefined;
@@ -62,7 +65,8 @@ export function getRouteFromUrl(url: URL): string | undefined {
 
   if (defaultLang === currentLang) {
     const route = Object.values(routes)[0];
-    return route[path] !== undefined ? route[path] : undefined;
+
+    return route[path] ?? undefined;
   }
 
   const getKeyByValue = (obj: Record<string, string>, value: string): string | undefined => {

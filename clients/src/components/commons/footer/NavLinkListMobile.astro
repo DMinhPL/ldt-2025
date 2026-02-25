@@ -1,0 +1,33 @@
+---
+type LinkItem = { label: string; href: string };
+
+interface Props {
+  title?: string;
+  links: LinkItem[];
+}
+
+const { title, links } = Astro.props;
+const hasTitle = Boolean(title);
+---
+
+<div class='navLink lg:w-full w-1/2'>
+  <h3
+    class={`text-lg lg:text-[22px] font-bold ${
+      hasTitle ? '' : 'opacity-0 pointer-events-none lg:block'
+    }`}
+  >
+    {title ?? 'Placeholder'}
+  </h3>
+
+  <ul class='lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col'>
+    {
+      links.map(({ label, href }) => (
+        <li class='flex'>
+          <a href={href} class='lg:mr-2 w-full'>
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

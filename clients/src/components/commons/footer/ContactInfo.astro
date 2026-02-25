@@ -1,0 +1,58 @@
+---
+import { SVGIcons } from '../../../utils/icons';
+
+type General = {
+  address?: string | null;
+  email?: string | null;
+  phone?: string | null;
+};
+
+interface Props {
+  title: string;
+  general?: General | null;
+}
+
+const { title, general } = Astro.props;
+
+const contactInfo = [
+  {
+    href: '',
+    icon: SVGIcons.location.src,
+    text: general?.address ?? '',
+  },
+  {
+    href: general?.email ? `mailto:${general.email}` : '',
+    icon: SVGIcons.envelop.src,
+    text: general?.email ?? '',
+  },
+  {
+    href: general?.phone ? `tel:${general.phone}` : '',
+    icon: SVGIcons.phone.src,
+    text: general?.phone ?? '',
+  },
+].filter((item) => item.text); // hide empty rows
+---
+
+<div class='text-raisin-black'>
+  <h3 class='text-lg lg:text-[22px] font-bold'>{title}</h3>
+
+  <ul class='lg:text-lg lg:mt-5 text-base mt-2 gap-2 flex flex-col'>
+    {
+      contactInfo.map(({ href, icon, text }) => (
+        <li class='flex'>
+          <div class='w-6 mt-1.5'>
+            <img src={icon} alt='icon' width='17' height='17' />
+          </div>
+
+          {href ? (
+            <a href={href} class='ml-2 w-full'>
+              {text}
+            </a>
+          ) : (
+            <p class='ml-2 w-full -tracking-[0.02em]'>{text}</p>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

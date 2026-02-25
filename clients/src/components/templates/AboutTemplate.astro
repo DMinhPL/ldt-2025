@@ -8,7 +8,6 @@ type Props = {
 };
 
 const { lang, canonical, alternates = [] } = Astro.props;
-console.log('AboutTemplate lang:', lang);
 const t = useTranslations(lang);
 ---
 

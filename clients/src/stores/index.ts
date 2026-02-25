@@ -1,3 +1,4 @@
 export * from "./theme";
 export * from "./menu";
 export * from "./themeBackground";
+export * from "./general";

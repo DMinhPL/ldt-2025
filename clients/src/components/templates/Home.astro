@@ -1,0 +1,106 @@
+---
+import { getGeneral, getHomepage, getHotCaseStudyPost } from '../../api';
+import { defaultLang } from '../../i18n/ui';
+import { useTranslatedPath, useTranslations } from '../../i18n/utils';
+import { getStrapiMedia } from '../../utils/api-helpers';
+import { SVGIcons } from '../../utils/icons';
+import { getThemeBackgroundFromPath } from '../../utils/theme';
+import Button from '../atoms/Button.astro';
+import AIModuleIframe from '../commons/AIModuleIframe.astro';
+import Banner from '../commons/Banner';
+import MetaKeywords from '../commons/MetaKeywords.astro';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+
+type Props = {
+  lang: SystemLanguageEnum;
+};
+
+const { lang } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const { data: homepageData } = await getHomepage(lang);
+
+const container = await AstroContainer.create();
+const ctaHTML = await container.renderToString(Button, {
+  slots: {
+    default: t('general.getStarted'),
+  },
+  props: {
+    link: translatePath(`${homepageData?.banner.link.url}`),
+  },
+});
+const bg = getThemeBackgroundFromPath(pathname, defaultLang);
+
+const caseDetail = await getHotCaseStudyPost(lang);
+const { data } = await getGeneral(lang);
+---
+
+<>
+  <MetaKeywords keywords={data?.seo?.keywords} />
+  <Banner
+    imgSrc={getStrapiMedia(homepageData?.banner.thumbnail.url)}
+    title={homepageData?.banner.heading}
+    description={homepageData?.banner.longDescription}
+    actionHTML={ctaHTML}
+    theme={bg}
+    client:load
+  />
+  <section id='ai' class='py-8.75 lg:py-15 xl:py-20'>
+    <div class='container mx-auto'>
+      {/* Chat AI  */}
+      <div class='content text-center'>
+        <h2
+          class='text-[24px] tracking-[-0.05em] sm:tracking-normal xs:text-[30px] lg:text-[55px] text-raisin-black'
+        >
+          {homepageData?.blocks[0].heading}
+        </h2>
+        <p class='text-licorice text-lg mt-2 max-w-160.25 mx-auto'>
+          {homepageData?.blocks[0].description}
+        </p>
+        <AIModuleIframe />
+      </div>
+      {/* Global HR Management  */}
+      <div class='content mt-12'>
+        <h4 class='text-usafa-blue font-semibold text-xl uppercase'>
+          {homepageData?.blocks[1].tag}
+        </h4>
+        <h2
+          class='max-w-237.5 text-[30px] lg:text-[55px] text-raisin-black font-semibold lg:font-bold leading-10 lg:leading-14'
+        >
+          {homepageData?.blocks[1].heading}
+        </h2>
+        <p class='text-licorice text-lg mt-2 max-w-230'>
+          {homepageData?.blocks[1].description}
+        </p>
+        {
+          homepageData?.blocks[1].thumbnail && (
+            <div class='thumbnail max-w-275 xl:max-w-7xl mx-auto mt-10'>
+              <img
+                src={getStrapiMedia(homepageData?.blocks[1].thumbnail.url)}
+                width={1356}
+                height={853}
+                alt='banner'
+              />
+            </div>
+          )
+        }
+        <div class='text-center'>
+          <a
+            href={`/${translatePath('case-studies')}/${caseDetail?.slug}`}
+            class='text-green-ryb font-bold text-lg lg:text-xl underline inline-flex items-center gap-2'
+          >
+            {t('general.viewMoreCaseStudies')}
+            <img
+              src={SVGIcons.arrowRight.src}
+              alt='arrow right'
+              width={19}
+              height={14}
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</>

@@ -1,0 +1,46 @@
+---
+import logo from '../../../assets/images/logo.png';
+import { getStrapiMedia } from '../../../utils/api-helpers';
+import { iconList } from '../../../utils/constants';
+
+interface Props {
+  generalData: GeneralResponseType;
+}
+
+const { generalData } = Astro.props;
+
+const logoUrl = generalData?.logo?.url
+  ? getStrapiMedia(generalData.logo.url)
+  : logo.src;
+
+const logoAlt = generalData?.logo?.alternativeText ?? 'logo';
+
+const socials = (generalData?.socials ?? []).filter((s) => s?.url && s?.text);
+---
+
+<div class='lg:block flex justify-center items-center flex-col'>
+  <a href='/' class='flex justify-center'>
+    <img src={logoUrl} alt={logoAlt} width='121' height='49' />
+  </a>
+
+  <div class='flex gap-7 items-center justify-center mt-14'>
+    {
+      socials.map(({ url, text, isExternal }) => {
+        const icon = iconList.find((item) => item.title === text)?.icon;
+
+        // If no matching icon, skip rendering that social item
+        if (!icon) return null;
+
+        return (
+          <a
+            href={url}
+            target={isExternal ? '_blank' : '_self'}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+          >
+            <img src={icon} alt={text} width='20' height='20' />
+          </a>
+        );
+      })
+    }
+  </div>
+</div>

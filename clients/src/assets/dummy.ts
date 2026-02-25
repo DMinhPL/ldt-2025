@@ -24,7 +24,7 @@ const GENERAL_RESPONSE_DUMMY = {
     logo: {
       id: 136,
       documentId: "c01ek9bpmc8flissttp1ybe8",
-      url: "/uploads/logo_4e0e78bfe4.png",
+      url: "https://adm-stag.longduongthuan.com/uploads/logo_4e0e78bfe4.png",
       alternativeText: null,
     },
     schedule_block: {

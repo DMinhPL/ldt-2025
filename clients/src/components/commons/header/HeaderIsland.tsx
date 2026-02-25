@@ -8,20 +8,19 @@ import logoImg from '../../../assets/images/logo.png';
 import hotlineIcon from '../../../assets/icons/ic_hotline.svg';
 import BurgerButton from '../../atoms/BurgerButton';
 import { useStore } from '@nanostores/react';
-import { GENERAL_RESPONSE_DUMMY } from '../../../assets/dummy';
-
-const general = GENERAL_RESPONSE_DUMMY.data;
+import { getStrapiMedia } from '../../../utils/api-helpers';
 
 interface Props {
   lang: 'en' | 'vi-VN';
   pathname: string;
   theme: ThemeBackground;
+  generalData?: GeneralResponseType;
 
   // ✅ receive already-rendered HTML from Astro
   ctaHTML?: string;
 }
 
-const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, ctaHTML }) => {
+const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, generalData, ctaHTML }) => {
   const t = useTranslations(lang);
   const translatePath = useTranslatedPath(lang);
 
@@ -66,7 +65,7 @@ const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, ctaHTML }) => {
           <div className="left flex items-center">
             <div className="logo max-w-22.5 lg:max-w-full">
               <a href={translatePath('/')}>
-                <img src={logoImg.src} alt="logo" width={115} height={46} />
+                <img src={generalData?.logo?.url ? getStrapiMedia(generalData.logo.url) : logoImg.src} alt={generalData?.logo?.alternativeText ?? 'logo'} width={115} height={46} />
               </a>
             </div>
 
@@ -86,8 +85,8 @@ const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, ctaHTML }) => {
                 <img src={hotlineIcon.src} alt="hotline" width={18} height={18} className="mr-1" />
                 <p className="text-lg">
                   {t('general.hotline')}:{" "}
-                  <a href={`tel:${general?.phone}`} className="font-bold text-usafa-blue">
-                    {t('general.phoneNumber')}
+                  <a href={`tel:${generalData?.phone}`} className="font-bold text-usafa-blue">
+                    {generalData?.phone}
                   </a>
                 </p>
               </div>
@@ -103,8 +102,8 @@ const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, ctaHTML }) => {
                 <img src={hotlineIcon.src} alt="hotline" width={18} height={18} className="mr-1" />
                 <p className="text-base xl:text-lg">
                   {t('general.hotline')}:{" "}
-                  <a href={`tel:${general?.phone}`} className="font-bold text-usafa-blue">
-                    {general?.phone}
+                  <a href={`tel:${generalData?.phone}`} className="font-bold text-usafa-blue">
+                    {generalData?.phone}
                   </a>
                 </p>
               </div>

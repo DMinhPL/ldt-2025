@@ -6,6 +6,7 @@ import type { ThemeBackground } from '../../../stores';
 import Button from '../../atoms/Button.astro';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { useTranslatedPath, useTranslations } from '../../../i18n/utils';
+import getGeneral from '../../../api/general';
 
 interface Props {
   children?: any; // Astro slot content
@@ -16,6 +17,7 @@ interface Props {
 const container = await AstroContainer.create();
 const t = useTranslations(Astro.props.lang);
 const translatePath = useTranslatedPath(Astro.props.lang);
+const { data: generalData } = await getGeneral(Astro.props.lang);
 
 // Render Astro Button to HTML string, then pass to React island
 
@@ -37,4 +39,5 @@ const { lang, pathname, theme } = Astro.props;
   theme={theme}
   client:load
   ctaHTML={ctaHTML}
+  generalData={generalData}
 />

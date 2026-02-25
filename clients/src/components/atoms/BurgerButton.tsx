@@ -10,7 +10,6 @@ const BurgerButton: React.FC<Props> = ({ onClick, isOpen }) => (
     type="button"
     className="absolute right-4 top-1/2 transform -translate-y-1/2 group lg:hidden"
     onClick={() => {
-      console.log('BurgerButton clicked, new state:', isOpen);
       onClick(!isOpen);
     }}
   >

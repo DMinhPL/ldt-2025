@@ -1,0 +1,108 @@
+---
+import LanguageSwitcher from '../../atoms/LanguageSwitcher'; // React component
+import NavLinkList from './NavLinkList.astro';
+import NavLinkListMobile from './NavLinkListMobile.astro';
+
+import getGeneral from '../../../api/general';
+import { useTranslatedPath, useTranslations } from '../../../i18n/utils';
+import Button from '../../atoms/Button.astro';
+import ContactInfo from './ContactInfo.astro';
+import FooterLogo from './FooterLogo.astro';
+
+interface Props {
+  lang: SystemLanguageEnum;
+}
+
+const { lang } = Astro.props;
+
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const { data: generalData } = await getGeneral(lang);
+
+const navLinks = [
+  {
+    title: t('general.links'),
+    links: [
+      { label: t('menu.home'), href: translatePath('/') },
+      { label: t('menu.chatAi'), href: translatePath('/agentic-ai') },
+      { label: t('menu.caseStudies'), href: translatePath('/case-studies') },
+    ],
+  },
+  {
+    title: '',
+    links: [
+      { label: t('menu.aboutUs'), href: translatePath('/about') },
+      { label: t('menu.contact'), href: translatePath('/contact') },
+    ],
+  },
+];
+---
+
+<footer class='bg-white'>
+  <div class='container mx-auto pt-9 lg:pt-12.5 pb-5'>
+    <div class='flex flex-wrap gap-4'>
+      <!-- Logo & Socials -->
+      <div class='w-full lg:w-3/12'>
+        <!-- If FooterLogo is React, hydrate it -->
+        <FooterLogo generalData={generalData} />
+        <!-- If FooterLogo is Astro instead, remove client:load -->
+      </div>
+
+      <!-- Contact Information -->
+      <div class='w-full lg:w-3/12'>
+        <ContactInfo title={t('general.office')} general={generalData} />
+      </div>
+
+      <!-- Navigation Links (mobile) -->
+      <div class='flex lg:hidden w-full'>
+        {
+          navLinks.map(({ title, links }) => (
+            <NavLinkListMobile title={title} links={links} />
+          ))
+        }
+      </div>
+
+      <!-- Navigation Links (desktop) -->
+      <div class='w-full lg:w-3/12 flex justify-between lg:ml-5'>
+        {
+          navLinks.map(({ title, links }) => (
+            <NavLinkList title={title} links={links} />
+          ))
+        }
+      </div>
+
+      <!-- CTA + Language -->
+      <div
+        class='lg:block flex flex-row-reverse gap-3.5 w-full lg:w-2/12 lg:ml-auto lg:mr-0'
+      >
+        <h3
+          class='text-lg lg:text-[22px] font-bold opacity-0 pointer-events-none hidden lg:block'
+        >
+          Placeholder
+        </h3>
+
+        <div class='action lg:mt-5 max-w-47.75 lg:w-full w-1/2'>
+          <Button link={translatePath('/contact')}>
+            {t('general.getStarted')}
+          </Button>
+        </div>
+
+        <div class='lg:mt-2 max-w-47.75 lg:w-full w-1/2'>
+          <!-- LanguageSwitcher is React => island -->
+          <LanguageSwitcher lang={lang} client:load />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class='relative text-center pt-3 pb-4'>
+    <div
+      class='border-t border-green-ryb absolute top-0 left-0 w-full h-px opacity-[0.29]'
+    >
+    </div>
+    <h3 class='text-battleship-grey'>
+      © 2025 Long Duong Thuan Company Limited. All rights reserved.
+    </h3>
+  </div>
+</footer>

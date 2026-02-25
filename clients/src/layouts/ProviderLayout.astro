@@ -1,0 +1,18 @@
+---
+import { GENERAL_RESPONSE_DUMMY } from '../assets/dummy';
+
+console.log('ProviderLayout loaded');
+// Fetch general api
+const generalData = GENERAL_RESPONSE_DUMMY;
+---
+
+<>
+  <script type='module' define:vars={{ generalData }}>
+    // import { updateGeneral } from '../stores/general';
+
+    // This runs in the browser
+    // if (generalData) updateGeneral(generalData);
+  </script>
+
+  <slot />
+</>

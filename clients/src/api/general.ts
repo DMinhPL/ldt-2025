@@ -19,6 +19,11 @@ async function getGeneral(locale?: SystemLanguageEnum): Promise<StrapiServerResp
           'og_image',
           'og_type',
         ],
+        populate: {
+          image: {
+            fields: ['url'],
+          },
+        },
       },
       logo: {
         fields: ['url', 'alternativeText'],

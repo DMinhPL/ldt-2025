@@ -1,18 +1,29 @@
 ---
 import { GENERAL_RESPONSE_DUMMY } from '../assets/dummy';
+import Footer from '../components/commons/footer/Footer.astro';
+import Head from '../components/commons/Head.astro';
+import Header from '../components/commons/header/Header.astro';
+import { defaultLang } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+import { getThemeBackgroundFromPath } from '../utils/theme';
 
-console.log('ProviderLayout loaded');
-// Fetch general api
-const generalData = GENERAL_RESPONSE_DUMMY;
+interface Props {
+  seo?: SEOResponseType;
+}
+const { seo } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const lang = getLangFromUrl(Astro.url);
+const bg = getThemeBackgroundFromPath(pathname, defaultLang);
 ---
 
 <>
-  <script type='module' define:vars={{ generalData }}>
-    // import { updateGeneral } from '../stores/general';
-
-    // This runs in the browser
-    // if (generalData) updateGeneral(generalData);
-  </script>
-
-  <slot />
+  <head>
+    <Head seo={seo} />
+  </head>
+  <body class={`main bg-${bg}`}>
+    <Header theme={bg} lang={lang} pathname={pathname} />
+    <slot />
+    <Footer lang={lang} />
+  </body>
 </>

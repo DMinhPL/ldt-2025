@@ -1,56 +1,166 @@
 ---
-import { useTranslations } from '../../i18n/utils';
+import { getAboutPage } from '../../api';
+import { defaultLang } from '../../i18n/ui';
+import ProviderLayout from '../../layouts/ProviderLayout.astro';
+import { getStrapiMedia } from '../../utils/api-helpers';
+import { getThemeBackgroundFromPath } from '../../utils/theme';
+import AboutAccordion from '../commons/AboutAccordion';
+import Banner from '../commons/Banner';
+import MetaKeywords from '../commons/MetaKeywords.astro';
+import ScheduleBottom from '../commons/ScheduleBottom.astro';
 
 type Props = {
-  lang: 'en' | 'vi-VN';
-  canonical?: string;
-  alternates?: { lang: 'en' | 'vi-VN'; href: string }[];
+  lang: SystemLanguageEnum;
 };
 
-const { lang, canonical, alternates = [] } = Astro.props;
-const t = useTranslations(lang);
+const { lang } = Astro.props;
+const pathname = Astro.url.pathname;
+const theme = getThemeBackgroundFromPath(pathname, defaultLang);
+
+const {
+  data: { banner, blocks, why_block_options, seo },
+} = await getAboutPage(lang);
+const whyOptions = why_block_options.map((option) => ({
+  title: option.heading,
+  content: option.description,
+}));
+
+const subHeadingClassname =
+  'text-[30px] lg:text-[40px] text-raisin-black mt-2 lg:mt-0 leading-9.5 lg:leading-14';
 ---
 
-<html lang={lang === 'vi-VN' ? 'vi-VN' : 'en'}>
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width' />
-
-    <!-- <title>{t.title}</title>
-    <meta name='description' content={t.desc} /> -->
-
-    {canonical && <link rel='canonical' href={canonical} />}
-
-    {
-      alternates.map((a) => (
-        <link rel='alternate' href={a.href} hreflang={a.lang} />
-      ))
-    }
-    {/* Optional: default language */}
-    {
-      alternates.length > 0 && (
-        <link rel='alternate' href={alternates[0].href} hreflang='x-default' />
-      )
-    }
-  </head>
-
-  <body>
-    <nav style='display:flex; gap:12px; padding:12px 0;'>
-      <a href='/' aria-current={lang === 'en' ? 'page' : undefined}>Home</a>
-      <a href='/about' aria-current={lang === 'en' ? 'page' : undefined}
-        >English</a
-      >
-      <a
-        href='/vi/ve-chung-toi'
-        aria-current={lang === 'vi-VN' ? 'page' : undefined}>Tiếng Việt</a
-      >
-    </nav>
-
-    <main style='max-width: 820px; margin: 0 auto; padding: 24px;'>
-      <h1>{t('menu.aboutUs')}</h1>
-
-      <hr />
-      <p><small>Current lang: <strong>{lang}</strong></small></p>
-    </main>
-  </body>
-</html>
+<ProviderLayout seo={seo}>
+  <MetaKeywords keywords={seo?.keywords} />
+  <Banner
+    imgSrc={banner?.thumbnail.url}
+    titleStyles='lg:max-w-[790px]'
+    title={banner?.heading}
+    description={banner?.longDescription}
+    theme={theme}
+  />
+  {/* Who we are  */}
+  <section id='who' class='py-3.5 lg:py-20 le'>
+    <div class='container mx-auto'>
+      <div class='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div class='content'>
+          <h4 class='text-usafa-blue font-semibold text-xl uppercase'>
+            {blocks[0].tag}
+          </h4>
+          <h2 class={subHeadingClassname}>
+            {blocks[0].heading}
+          </h2>
+        </div>
+        <div class='content pl-0 lg:pl-10 xl:pl-20'>
+          <h4
+            class='text-usafa-blue font-semibold text-xl opacity-0 pointer-events-none hidden lg:block'
+          >
+            placeholder
+          </h4>
+          <p class='text-licorice text-lg lg:mt-2 max-w-230'>
+            {blocks[0].description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {/* What we do  */}
+  {
+    blocks[1] && (
+      <section id='what' class='pt-10 pb-8 lg:py-20'>
+        <div class='container mx-auto'>
+          {blocks[1]?.thumbnail ? (
+            <div class='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+              <div class='content'>
+                <img
+                  src={getStrapiMedia(blocks[1]?.thumbnail?.url || '')}
+                  alt='banner'
+                  width={763}
+                  height={501}
+                />
+              </div>
+              <div class='content pl-0 lg:pl-10 xl:pl-20'>
+                <h4 class='text-usafa-blue font-semibold text-xl uppercase'>
+                  {blocks[1].tag}
+                </h4>
+                <h2 class={subHeadingClassname}>{blocks[1].heading}</h2>
+                <p class='text-licorice text-lg mt-2 max-w-230'>
+                  {blocks[1].description}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div class=''>
+              <div class='content'>
+                <h4 class='text-usafa-blue font-semibold text-xl uppercase'>
+                  {blocks[1].tag}
+                </h4>
+                <h2 class={subHeadingClassname}>{blocks[1].heading}</h2>
+                <p class='text-licorice text-lg mt-2 max-w-230'>
+                  {blocks[1].description}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+  {/* Why choose us  */}
+  {
+    blocks[2] && (
+      <section id='why' class='py-10.5 bg-green-ryb-opacity'>
+        <div class='container mx-auto'>
+          {blocks[2]?.thumbnail ? (
+            <div class='lg:flex'>
+              <div class='content lg:flex-1/2'>
+                <h4 class='text-usafa-blue font-semibold text-xl uppercase'>
+                  {blocks[2].tag}
+                </h4>
+                <h2 class='text-[30px] lg:text-[40px] text-raisin-black mt-2 lg:mt-0 mb-9 leading-9.5 lg:leading-14'>
+                  {blocks[2].heading}
+                </h2>
+                <div class='flex justify-center lg:hidden mb-8'>
+                  <img
+                    src={getStrapiMedia(blocks[2]?.thumbnail?.url || '')}
+                    alt='banner'
+                    width={390}
+                    height={389}
+                  />
+                </div>
+                <AboutAccordion client:load accordionData={whyOptions} />
+              </div>
+              <div class='content lg:flex-1/2 pl-0 lg:pl-10 xl:pl-20 mt-4 lg:mt-0 mx-auto lg:mx-0 hidden lg:block'>
+                <img
+                  src={getStrapiMedia(blocks[2]?.thumbnail?.url || '')}
+                  alt='banner'
+                  width={543}
+                  height={541}
+                />
+              </div>
+            </div>
+          ) : (
+            <div class=''>
+              <div class='content'>
+                <h4 class='text-usafa-blue font-semibold text-xl uppercase'>
+                  {blocks[2].tag}
+                </h4>
+                <h2 class='text-[30px] lg:text-[40px] text-raisin-black mt-2 lg:mt-0 mb-9 leading-9.5 lg:leading-14'>
+                  {blocks[2].heading}
+                </h2>
+                <AboutAccordion client:load accordionData={whyOptions} />
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+  {/* Want to chat  */}
+  <section id='wantTo' class='py-20 bg-green-ryb-opacity hidden lg:block'>
+    <div class='container mx-auto'>
+      <div class='content text-center'>
+        <ScheduleBottom />
+      </div>
+    </div>
+  </section>
+</ProviderLayout>

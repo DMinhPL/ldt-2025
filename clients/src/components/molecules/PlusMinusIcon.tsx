@@ -1,0 +1,15 @@
+import React from 'react';
+
+const PlusMinusIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => (
+  <span className="relative w-3 h-3 flex items-center justify-center">
+    {/* Horizontal Line */}
+    <span className="absolute w-full h-0.5 bg-black transition-all duration-300" />
+    {/* Vertical Line (Disappears on Open) */}
+    <span
+      className={`absolute h-full w-0.5 bg-black transition-all duration-300 ${isOpen ? 'scale-0' : 'scale-100'
+      }`}
+    />
+  </span>
+);
+
+export default PlusMinusIcon;

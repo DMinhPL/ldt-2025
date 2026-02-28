@@ -1,0 +1,24 @@
+---
+import { getGeneral } from '../../api';
+import { getLangFromUrl } from '../../i18n/utils';
+import { iconList } from '../../utils/constants';
+
+const lang = getLangFromUrl(Astro.url);
+const { data: generalData } = await getGeneral(lang);
+---
+
+{
+  generalData.socials.map(({ url, text, isExternal }) => {
+    const icon = iconList.find((item) => item.title === text)?.icon;
+
+    return (
+      <a
+        href={url}
+        target={isExternal ? '_blank' : '_self'}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+      >
+        <img src={icon} alt={text} width='20' height='20' />
+      </a>
+    );
+  })
+}

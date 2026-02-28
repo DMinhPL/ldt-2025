@@ -1,25 +1,88 @@
 ---
 import { Font } from 'astro:assets';
+import logoImg from '../../assets/images/logo.png';
+import { getStrapiMedia } from '../../utils/api-helpers';
 
-const { title = 'Long Duong Thuan Ltd.' } = Astro.props;
+interface Props {
+  title?: string;
+  seo?: SEOResponseType;
+}
+
+const { seo } = Astro.props;
+
+const metadata = {
+  title: 'Long Dương Thuận Ltd.',
+  description:
+    'Transform complexity into seamless operations with cutting-edge technology. Automate workflows effortlessly—no bottlenecks, no limits, just innovation.',
+  metadataBase: new URL('https://longduongthuan.com'),
+  keywords: ['chat ai', 'phần mềm', 'hỗ trợ phát triển'],
+  openGraph: {
+    title: 'Long Dương Thuận Ltd.',
+    description:
+      'Transform complexity into seamless operations with cutting-edge technology. Automate workflows effortlessly—no bottlenecks, no limits, just innovation.',
+    url: 'https://longduongthuan.com',
+    siteName: 'Long Duong Thuan Ltd.',
+    images: [
+      {
+        url: logoImg.src,
+        width: logoImg.width,
+        height: logoImg.height,
+        alt: 'Long Dương Thuận Ltd. Open Graph Image',
+      },
+    ],
+    locale: 'en',
+    type: 'website',
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', type: 'image/png' },
+      { url: '/favicon-32x32.png', type: 'image/png' },
+      { url: '/favicon-96x96.png', type: 'image/png' },
+    ],
+    shortcut: '/favicon-32x32.png',
+    apple: [
+      { url: '/apple-icon.png', type: 'image/png' },
+      { url: '/apple-icon-72x72.png', type: 'image/png' },
+      { url: '/apple-icon-120x120.png', type: 'image/png' },
+      { url: '/apple-icon-180x180.png', type: 'image/png' },
+    ],
+    other: [
+      { url: '/android-icon-36x36.png', type: 'image/png' },
+      { url: '/android-icon-48x48.png', type: 'image/png' },
+      { url: '/android-icon-72x72.png', type: 'image/png' },
+      { url: '/android-icon-96x96.png', type: 'image/png' },
+      { url: '/android-icon-192x192.png', type: 'image/png' },
+    ],
+  },
+};
 ---
 
 <!-- <link rel="sitemap" href="/sitemap-index.xml"> -->
-<title>{title}</title>
-<meta name='description' content='Welcome to my new Astro site!' />
+<title>{seo?.title || metadata.title}</title>
+<meta name='description' content={seo?.description || metadata.description} />
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width' />
 <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 <link rel='icon' href='/favicon.ico' />
+
 <meta name='generator' content={Astro.generator} />
 <!-- Open Graph tags -->
-<meta property='og:title' content='Long Duong Thuan Ltd.' />
+<meta property='og:title' content={seo?.title || metadata.title} />
 <meta property='og:type' content='website' />
-<meta property='og:url' content='https://www.longduongthuan.com/en/' />
-<meta property='og:description' content='Welcome to my new Astro site!' />
+<meta
+  property='og:url'
+  content={seo?.canonical_url || metadata.openGraph.url}
+/>
+<meta
+  property='og:description'
+  content={seo?.description || metadata.description}
+/>
 <meta
   property='og:image'
-  content='https://www.example.com/_astro/seo-banner.BZD7kegZ.webp'
+  content={seo?.og_image ||
+    (seo?.image?.url && getStrapiMedia(seo?.image?.url)) ||
+    metadata.openGraph.images[0].url}
 />
-<meta property='og:image:alt' content='' />
+<meta property='og:image:alt' content={metadata.openGraph.images[0].alt} />
+<meta name='twitter:card' content='summary_large_image' />
 <Font cssVariable='--font-inter' preload />

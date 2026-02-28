@@ -39,6 +39,15 @@ export const ui = {
       aboutUs: "About Us",
       contact: "Contact",
     },
+    validation: {
+      nameRequired: "Name is required.",
+      companyRequired: "Company name is required.",
+      emailRequired: "Email address is required.",
+      emailInvalid: "Please enter a valid email address.",
+      phoneRequired: "Phone number is required.",
+      budgetRequired: "Please select your budget.",
+      sourceRequired: "Please let us know how you found us."
+    }
   },
 
   'vi-VN': {
@@ -73,6 +82,15 @@ export const ui = {
       aboutUs: "Giới Thiệu",
       contact: "Liên Hệ",
     },
+    validation: {
+      nameRequired: "Vui lòng nhập họ và tên.",
+      companyRequired: "Vui lòng nhập tên công ty.",
+      emailRequired: "Vui lòng nhập địa chỉ email.",
+      emailInvalid: "Vui lòng nhập địa chỉ email hợp lệ.",
+      phoneRequired: "Vui lòng nhập số điện thoại.",
+      budgetRequired: "Vui lòng chọn ngân sách.",
+      sourceRequired: "Vui lòng cho chúng tôi biết bạn biết đến chúng tôi qua đâu."
+    }
   },
 } as const;
 

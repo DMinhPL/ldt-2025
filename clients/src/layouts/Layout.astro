@@ -1,27 +1,15 @@
 ---
-import Head from '../components/commons/Head.astro';
+import { defaultLang } from '../i18n/ui';
 import '../styles/global.css';
 import { getThemeBackgroundFromPath } from '../utils/theme';
-import { defaultLang } from '../i18n/ui';
-import { getLangFromUrl } from '../i18n/utils';
-import Header from '../components/commons/header/Header.astro';
-import Footer from '../components/commons/footer/Footer.astro';
 
 const pathname = Astro.url.pathname;
-const lang = getLangFromUrl(Astro.url);
 const bg = getThemeBackgroundFromPath(pathname, defaultLang);
 ---
 
 <!doctype html>
 <html lang='en' data-bg={bg}>
-  <head>
-    <Head />
-  </head>
-  <body class={`main bg-${bg}`}>
-    <Header theme={bg} lang={lang} pathname={pathname} />
-    <slot />
-    <Footer lang={lang} />
-  </body>
+  <slot />
 </html>
 
 <style is:global>

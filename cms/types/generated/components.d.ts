@@ -71,12 +71,14 @@ export interface LayoutHeroSection extends Struct.ComponentSchema {
 export interface LayoutMetadata extends Struct.ComponentSchema {
   collectionName: 'components_layout_metadata';
   info: {
+    description: '';
     displayName: 'Metadata';
     icon: 'seed';
   };
   attributes: {
     canonical_url: Schema.Attribute.String;
     description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
     keywords: Schema.Attribute.Text;
     og_description: Schema.Attribute.String;
     og_image: Schema.Attribute.Text;

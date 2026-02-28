@@ -1,0 +1,70 @@
+---
+import { getChatAIPage } from '../../api';
+import { defaultLang } from '../../i18n/ui';
+import ProviderLayout from '../../layouts/ProviderLayout.astro';
+import { getThemeBackgroundFromPath } from '../../utils/theme';
+import AIModuleIframe from '../commons/AIModuleIframe.astro';
+import Banner from '../commons/Banner';
+import MetaKeywords from '../commons/MetaKeywords.astro';
+import ScheduleBottom from '../commons/ScheduleBottom.astro';
+import WhyBlockItem from '../molecules/WhyBlockItem';
+
+type Props = {
+  lang: SystemLanguageEnum;
+};
+
+const { lang } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const {
+  data: { banner, blocks, why_block, seo },
+} = await getChatAIPage(lang);
+
+const bg = getThemeBackgroundFromPath(pathname, defaultLang);
+
+const whyBlocks = why_block?.services
+  ? why_block.services.map((item) => ({
+      title: item.title,
+      description: item.description,
+      icon: item.icon,
+    }))
+  : [];
+---
+
+<ProviderLayout seo={seo}>
+  <MetaKeywords keywords={seo?.keywords} />
+  <Banner theme={bg} imgSrc={banner.thumbnail.url} title={banner.heading} />
+  {/* Who we are  */}
+  <section id='who' class='py-15 lg:pt-20 lg:pb-0'>
+    <div class='container mx-auto'>
+      <div class='content text-center'>
+        <h2
+          class='tracking-[-0.05em] sm:tracking-normal text-[30px] sm:text-3xl lg:text-[40px] xl:text-[55px] text-raisin-black'
+        >
+          {blocks.heading}
+        </h2>
+        <AIModuleIframe />
+      </div>
+    </div>
+  </section>
+  {/* Why choose  */}
+  <section id='why' class='py-15 lg:py-17.5 bg-[#51AA350D]'>
+    <div class='container mx-auto'>
+      <div class='content flex flex-wrap'>
+        <h2
+          class='text-[30px] sm:text-3xl text-center lg:text-left lg:text-[40px] text-raisin-black lg:w-4/12 w-full'
+        >
+          {why_block.heading}
+        </h2>
+        <div class='info lg:w-8/12 lg:pl-10 xl:pl-20 mt-9 lg:mt-0'>
+          <div class='grid lg:grid-cols-3 gap-4'>
+            {whyBlocks.map((item) => <WhyBlockItem {...item} />)}
+          </div>
+        </div>
+      </div>
+      <div class='content mt-10 lg:mt-20 text-center'>
+        <ScheduleBottom />
+      </div>
+    </div>
+  </section>
+</ProviderLayout>

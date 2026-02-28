@@ -1,0 +1,27 @@
+---
+import { getGeneral } from '../../api';
+import { getLangFromUrl } from '../../i18n/utils';
+import Button from '../atoms/Button.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const { data: generalData } = await getGeneral(lang);
+---
+
+<>
+  <h2 class='text-3xl lg:text-[40px] text-raisin-black'>
+    {generalData?.schedule_block.heading}
+  </h2>
+
+  <p class='text-licorice text-lg mt-2'>
+    {generalData?.schedule_block.description}
+  </p>
+
+  <div class='cta flex justify-center mt-7.25'>
+    <Button
+      link={generalData?.schedule_block.cta?.url}
+      className='max-w-47.75 w-full rounded-[10px]!'
+    >
+      {generalData?.schedule_block?.cta?.text}
+    </Button>
+  </div>
+</>

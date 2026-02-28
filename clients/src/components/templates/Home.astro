@@ -2,6 +2,7 @@
 import { getGeneral, getHomepage, getHotCaseStudyPost } from '../../api';
 import { defaultLang } from '../../i18n/ui';
 import { useTranslatedPath, useTranslations } from '../../i18n/utils';
+import ProviderLayout from '../../layouts/ProviderLayout.astro';
 import { getStrapiMedia } from '../../utils/api-helpers';
 import { SVGIcons } from '../../utils/icons';
 import { getThemeBackgroundFromPath } from '../../utils/theme';
@@ -37,7 +38,7 @@ const caseDetail = await getHotCaseStudyPost(lang);
 const { data } = await getGeneral(lang);
 ---
 
-<>
+<ProviderLayout seo={data?.seo}>
   <MetaKeywords keywords={data?.seo?.keywords} />
   <Banner
     imgSrc={getStrapiMedia(homepageData?.banner.thumbnail.url)}
@@ -103,4 +104,4 @@ const { data } = await getGeneral(lang);
       </div>
     </div>
   </section>
-</>
+</ProviderLayout>

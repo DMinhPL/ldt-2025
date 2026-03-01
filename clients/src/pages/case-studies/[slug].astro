@@ -1,0 +1,62 @@
+---
+import CaseStudyDetailTemplate from '../../components/templates/CaseStudyDetailTemplate.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+import CaseStudyPost from '../../layouts/CaseStudyPost.astro';
+import ProviderLayout from '../../layouts/ProviderLayout.astro';
+import {
+  fetchCaseStudyDetail,
+  fetchCaseStudyList,
+} from '../../services/caseStudyApi';
+
+const currentLang = getLangFromUrl(Astro.url);
+
+export async function getStaticPaths() {
+  const postList = await fetchCaseStudyList('en');
+
+  return postList
+    .filter((post) => !!post.slug)
+    .map((post) => {
+      return {
+        params: { slug: post.slug },
+        props: {
+          entry: post,
+          postList,
+        },
+      };
+    });
+}
+
+const { slug } = Astro.params;
+const { postList } = Astro.props;
+
+const postDetail = await fetchCaseStudyDetail('en', slug);
+
+const postListFiltered = postList
+  .sort((a, b) => {
+    if (a.isHot === b.isHot) return 0;
+
+    return a.isHot ? -1 : 1;
+  })
+  .filter((post) => post.slug !== slug);
+
+const metadata: SEOResponseType = {
+  title: `${postDetail?.title} - LDT`,
+  description: postDetail?.description || '',
+  image: postDetail?.thumbnail!,
+  id: postDetail?.id || 0,
+  canonical_url: `${import.meta.env.BASE_URL}${currentLang}/case-studies/${slug}`,
+  slug: slug,
+  og_title: `${postDetail?.title} - LDT`,
+  og_description: postDetail?.description || '',
+};
+---
+
+<ProviderLayout seo={metadata}>
+  <CaseStudyPost>
+    <CaseStudyDetailTemplate
+      postList={postListFiltered}
+      postDetail={postDetail!}
+      slug={slug}
+    />
+  </CaseStudyPost>
+</ProviderLayout>

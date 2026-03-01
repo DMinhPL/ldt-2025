@@ -21,6 +21,10 @@ type Props = {
 const LOCALE_PREFIX_RE = /^\/(en|vi-VN)(?=\/|$)/;
 
 function replaceLocaleInPath(pathname: string, nextLocale: string) {
+  if (nextLocale === "en") {
+    // Special case: if switching to English from root, just return "/"
+    return "/";
+  }
   if (LOCALE_PREFIX_RE.test(pathname)) {
     if (nextLocale === "en") {
       // If switching to English, remove the locale prefix
@@ -82,7 +86,6 @@ const LanguageSwitcher: React.FC<Props> = ({ lang }) => {
     // Preserve query/hash
     const nextUrl =
       nextPathname + globalThis.window.location.search + globalThis.window.location.hash;
-
     globalThis.window.location.assign(nextUrl);
   };
 
@@ -121,7 +124,7 @@ const LanguageSwitcher: React.FC<Props> = ({ lang }) => {
       {isOpen && (
         <div
           className={`absolute w-40 bg-white border rounded-md shadow-md ${isDropdownUp ? "bottom-full mb-2" : "top-full mt-2"
-          }`}
+            }`}
         >
           {languages.map((lng) => (
             <button

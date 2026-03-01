@@ -14,10 +14,9 @@ import Button from '../atoms/Button';
 interface Props {
   lang: SystemLanguageEnum;
   general?: GeneralResponseType;
-  ctaHTML: string;
 }
 
-const ContactForm: React.FC<Props> = ({ lang, general, ctaHTML }) => {
+const ContactForm: React.FC<Props> = ({ lang, general }) => {
   const t = useTranslations(lang);
   const [appLoading, setAppLoading] = useState(false);
   const contactFormSchema = z.object({
@@ -39,8 +38,6 @@ const ContactForm: React.FC<Props> = ({ lang, general, ctaHTML }) => {
   } = useForm<ContactFormType>({
     resolver: zodResolver(contactFormSchema),
   });
-  const token = import.meta.env.STRAPI_API_TOKEN;
-  console.log('token lien he', token);
 
   const handleFormSubmit = async (data: ContactFormType) => {
     setAppLoading(true);

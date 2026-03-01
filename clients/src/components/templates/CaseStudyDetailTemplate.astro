@@ -1,0 +1,159 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getStrapiMedia } from '../../utils/api-helpers';
+import RelatedCarousel from '../commons/RelatedCarousel';
+import ScheduleBottom from '../commons/ScheduleBottom.astro';
+
+interface Props {
+  postList: CaseStudyPostListType[];
+  postDetail?: CaseStudyPostDetailType;
+  slug: string;
+}
+
+const currentLang = getLangFromUrl(Astro.url);
+
+const { postList, postDetail, slug } = Astro.props;
+
+const postListFiltered = postList
+  .sort((a, b) => {
+    if (a.isHot === b.isHot) return 0;
+
+    return a.isHot ? -1 : 1;
+  })
+  .filter((post) => post.slug !== slug);
+
+const t = useTranslations(currentLang);
+---
+
+<div class='mt-15 sm:mt-[17.5]'>
+  {
+    !postDetail ? (
+      <div class='container mx-auto'>
+        <p class='p-6 text-center'>No data found.</p>
+      </div>
+    ) : (
+      <>
+        <h2 class='font-bold text-3xl lg:text-5xl text-center max-w-212.5 mx-auto py-9'>
+          {postDetail.title}
+        </h2>
+
+        <div class='container mx-auto xl:max-w-480 p-0'>
+          {postDetail.thumbnail && (
+            <img
+              src={getStrapiMedia(postDetail.thumbnail?.url)}
+              class='object-cover w-full aspect-661/342'
+              alt='banner'
+              width={1200}
+              height={750}
+            />
+          )}
+        </div>
+
+        <div class='container mx-auto pt-6 pb-0 md:py-20'>
+          <div class='overview max-w-221.5 mx-auto'>
+            <h2 class='text-[25px] lg:text-[40px]'>{t('general.overview')}</h2>
+            <p class='text-lg mt-0 sm:mt-3 xl:mt-7'>{postDetail.description}</p>
+          </div>
+
+          {postDetail?.contents?.map((item, idx) =>
+            idx % 2 === 0 ? (
+              <div class='lg:flex gap-4 xl:gap-0 mt-14'>
+                {item.thumbnail && (
+                  <div class='rounded-3xl overflow-hidden max-w-137.5 2xl:max-w-160.25 w-full h-full'>
+                    <img
+                      src={getStrapiMedia(item.thumbnail?.url) || ''}
+                      class='object-cover w-full aspect-661/531'
+                      width={641}
+                      height={531}
+                      alt={item.thumbnail?.alternativeText || item.heading}
+                    />
+                  </div>
+                )}
+
+                <div
+                  class={`content ${item.thumbnail ? 'flex-1/2 mt-11.75 md:mt-0' : ''}`}
+                >
+                  <div
+                    class={
+                      item.thumbnail
+                        ? 'lg:max-w-112.5 2xl:max-w-84 mx-auto 2xl:mr-auto 2xl:ml-28.25'
+                        : ''
+                    }
+                  >
+                    <h2 class='text-[25px] sm:text-3xl leading-8'>
+                      {item.heading}
+                    </h2>
+                    <p class='text-lg mt-4'>{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div class='lg:flex gap-4 xl:gap-0 mt-14'>
+                {item.thumbnail && (
+                  <div class='rounded-3xl overflow-hidden h-full lg:hidden'>
+                    <img
+                      src={getStrapiMedia(item.thumbnail?.url) || ''}
+                      class='object-cover w-full aspect-661/531'
+                      width={641}
+                      height={531}
+                      alt={item.thumbnail?.alternativeText || item.heading}
+                    />
+                  </div>
+                )}
+
+                <div
+                  class={`content ${item.thumbnail ? 'mt-11.75 md:mt-0 lg:flex-1/2' : ''}`}
+                >
+                  <div
+                    class={
+                      item.thumbnail
+                        ? 'lg:max-w-112.5 2xl:max-w-84 mx-auto 2xl:ml-auto 2xl:mr-28.25'
+                        : ''
+                    }
+                  >
+                    <h2 class='text-[25px] sm:text-3xl leading-8'>
+                      {item.heading}
+                    </h2>
+                    <p class='text-lg mt-4'>{item.description}</p>
+                  </div>
+                </div>
+
+                {item.thumbnail && (
+                  <div class='rounded-3xl overflow-hidden max-w-137.5 2xl:max-w-160.25 w-full h-full hidden lg:block'>
+                    <img
+                      src={getStrapiMedia(item.thumbnail?.url) || ''}
+                      class='object-cover w-full aspect-661/531'
+                      width={641}
+                      height={531}
+                      alt={item.thumbnail?.alternativeText || item.heading}
+                    />
+                  </div>
+                )}
+              </div>
+            ),
+          )}
+
+          {postListFiltered?.length > 0 && (
+            <hr class='my-8 md:mb-0 text-gray-500' />
+          )}
+        </div>
+
+        {postListFiltered?.length > 0 && (
+          <div class='related container mx-auto max-w-233.75 mb-10 lg:mb-20'>
+            <RelatedCarousel
+              client:load
+              data={postListFiltered}
+              currentLang={currentLang}
+            />
+          </div>
+        )}
+
+        <div class='content py-14 bg-white-smoke'>
+          <div class='container mx-auto text-center'>
+            <ScheduleBottom />
+          </div>
+        </div>
+      </>
+    )
+  }
+</div>

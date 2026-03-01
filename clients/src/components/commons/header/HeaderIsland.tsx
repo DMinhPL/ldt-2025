@@ -15,12 +15,13 @@ interface Props {
   pathname: string;
   theme: ThemeBackground;
   generalData?: GeneralResponseType;
+  hotCaseDetail?: CaseStudyPostListType;
 
   // ✅ receive already-rendered HTML from Astro
   ctaHTML?: string;
 }
 
-const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, generalData, ctaHTML }) => {
+const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, generalData, ctaHTML, hotCaseDetail }) => {
   const t = useTranslations(lang);
   const translatePath = useTranslatedPath(lang);
 
@@ -28,11 +29,11 @@ const HeaderIsland: React.FC<Props> = ({ lang, pathname, theme, generalData, cta
     () => [
       { url: translatePath('/'), title: t('menu.home') },
       { url: translatePath('/agentic-ai'), title: t('menu.chatAi') },
-      { url: translatePath('/case-studies'), title: t('menu.caseStudies') },
+      { url: translatePath('/case-studies') + `/${hotCaseDetail?.slug}`, title: t('menu.caseStudies') },
       { url: translatePath('/about'), title: t('menu.aboutUs') },
       { url: translatePath('/contact'), title: t('menu.contact') },
     ],
-    [translatePath, t]
+    [translatePath, t, hotCaseDetail?.slug]
   );
 
   const { width } = useWindowDimensions();

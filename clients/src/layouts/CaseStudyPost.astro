@@ -1,0 +1,32 @@
+---
+import { defaultLang } from '../i18n/ui';
+import '../styles/global.css';
+import { getThemeBackgroundFromPath } from '../utils/theme';
+
+const pathname = Astro.url.pathname;
+const bg = getThemeBackgroundFromPath(pathname, defaultLang);
+---
+
+<!doctype html>
+<html lang='en' data-bg={bg}>
+  <slot />
+</html>
+
+<style is:global>
+  html {
+    font-family:
+      var(--font-inter),
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      Arial,
+      sans-serif;
+  }
+  :root[data-bg='primary'] {
+    background-color: #51aa350d;
+  }
+  :root[data-bg='secondary'] {
+    background-color: white;
+  }
+</style>
